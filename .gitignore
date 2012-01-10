@@ -1,0 +1,7 @@
+*.DS_Store
+*.userprefs
+*.usertasks
+*.pidb
+bin/
+test-results/
+
