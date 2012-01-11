@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C793220D-4450-470E-8707-A5C14A2C16B0}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ez.Newsletter.MagentoApi</RootNamespace>
+    <AssemblyName>Ez.Newsletter.MagentoApi</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\CookComputing.XmlRpc\CookComputing.XmlRpc.csproj">
+      <Project>{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}</Project>
+      <Name>CookComputing.XmlRpc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="CategoryAssignedProduct.cs" />
+    <Compile Include="CategoryAttribute.cs" />
+    <Compile Include="CategoryAttributeOption.cs" />
+    <Compile Include="Connection.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustomerAddress.cs" />
+    <Compile Include="CustomerGroup.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderAddress.cs" />
+    <Compile Include="OrderInfo.cs" />
+    <Compile Include="OrderProduct.cs" />
+    <Compile Include="OrderStatus.cs" />
+    <Compile Include="Payment.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductAttribute.cs" />
+    <Compile Include="ProductAttributeOption.cs" />
+    <Compile Include="ProductAttributeSet.cs" />
+    <Compile Include="ProductImage.cs" />
+    <Compile Include="ProductImageFile.cs" />
+    <Compile Include="ProductLinkAttribute.cs" />
+    <Compile Include="ProductLinks.cs" />
+    <Compile Include="ProductSpecialPrice.cs" />
+    <Compile Include="ProductTierPrice.cs" />
+    <Compile Include="ProductType.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Region.cs" />
+    <Compile Include="Shipment.cs" />
+    <Compile Include="ShipmentInfo.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+</Project>

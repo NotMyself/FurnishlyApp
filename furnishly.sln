@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{504E0892-33E5-40D2-912C-45531EA9BA67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookComputing.XmlRpc", "lib\CookComputing.XmlRpc\CookComputing.XmlRpc.csproj", "{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ez.Newsletter.MagentoApi", "lib\Ez.Newsletter.MagentoApi\Ez.Newsletter.MagentoApi.csproj", "{C793220D-4450-470E-8707-A5C14A2C16B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C793220D-4450-470E-8707-A5C14A2C16B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C793220D-4450-470E-8707-A5C14A2C16B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C793220D-4450-470E-8707-A5C14A2C16B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C793220D-4450-470E-8707-A5C14A2C16B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2} = {504E0892-33E5-40D2-912C-45531EA9BA67}
+		{C793220D-4450-470E-8707-A5C14A2C16B0} = {504E0892-33E5-40D2-912C-45531EA9BA67}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = lib\CookComputing.XmlRpc\CookComputing.XmlRpc.csproj
+	EndGlobalSection
+EndGlobal

@@ -148,8 +148,8 @@ namespace Ez.Newsletter.MagentoApi
             #region Category Examples
 
             // get the current store (returns string instead of int)
-            string myCategoryCurrentStore = Category.CurrentStore(apiUrl, sessionId, new object[] { });
-            Console.WriteLine(myCategoryCurrentStore);
+            //string myCategoryCurrentStore = Category.CurrentStore(apiUrl, sessionId, new object[] { });
+            //Console.WriteLine(myCategoryCurrentStore);
 
             // get the tree (does not always return array)
             //object[] myCategoryTree = Category.Tree(apiUrl, sessionId);
@@ -234,8 +234,8 @@ namespace Ez.Newsletter.MagentoApi
             // list all products
             XmlRpcStruct filterOn = new XmlRpcStruct();
             XmlRpcStruct filterParams = new XmlRpcStruct();
-            filterParams.Add("like", "zol%");
-            filterOn.Add("sku", filterParams);
+            filterParams.Add("like", "%table%");
+            filterOn.Add("name", filterParams);
             Product[] myProducts = MagentoApi.Product.List(apiUrl, sessionId, new object[] { filterOn });
             foreach (Product myProduct in myProducts)
             {
