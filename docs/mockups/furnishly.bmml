@@ -169,58 +169,7 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::iPhone" x="884" y="210" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <bgPattern>topOnly</bgPattern>
-      </controlProperties>
-    </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::SubTitle" x="942" y="162" w="-1" h="-1" measuredW="165" measuredH="33" zOrder="6" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Search%20Screen</text>
-      </controlProperties>
-    </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::PointyButton" x="915" y="314" w="-1" h="-1" measuredW="50" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
-      <controlProperties>
-        <direction>left</direction>
-        <text>Back</text>
-      </controlProperties>
-    </control>
-    <control controlID="45" controlTypeID="com.balsamiq.mockups::PointyButton" x="1077" y="313" w="-1" h="-1" measuredW="54" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
-      <controlProperties>
-        <direction>center</direction>
-        <text>Home</text>
-      </controlProperties>
-    </control>
-    <control controlID="52" controlTypeID="__group__" x="917" y="358" w="215" h="213" measuredW="215" measuredH="213" zOrder="9" locked="false" isInGroup="-1">
-      <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="0" y="0" w="-1" h="-1" measuredW="215" measuredH="213" zOrder="0" locked="false" isInGroup="52">
-          <controlProperties>
-            <text>What%20are%20you%20looing%20for%3F%0A__%0AWhere%20are%20you%20located%3F%0A__%0AHow%20far%20away%3F%0A__%0A__</text>
-          </controlProperties>
-        </control>
-        <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="16" y="36" w="183" h="-1" measuredW="37" measuredH="27" zOrder="1" locked="false" isInGroup="52">
-          <controlProperties>
-            <text>Bed</text>
-          </controlProperties>
-        </control>
-        <control controlID="3" controlTypeID="com.balsamiq.mockups::ComboBox" x="16" y="154" w="183" h="-1" measuredW="107" measuredH="23" zOrder="2" locked="false" isInGroup="52">
-          <controlProperties>
-            <text>5%20Miles%20Away</text>
-          </controlProperties>
-        </control>
-        <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="78" y="181" w="-1" h="-1" measuredW="66" measuredH="27" zOrder="3" locked="false" isInGroup="52">
-          <controlProperties>
-            <text>Search</text>
-          </controlProperties>
-        </control>
-        <control controlID="5" controlTypeID="com.balsamiq.mockups::ComboBox" x="16" y="94" w="183" h="-1" measuredW="127" measuredH="23" zOrder="4" locked="false" isInGroup="52">
-          <controlProperties>
-            <text>Current%20Location</text>
-          </controlProperties>
-        </control>
-      </groupChildrenDescriptors>
-    </control>
-    <control controlID="67" controlTypeID="__group__" x="1240" y="161" w="282" h="552" measuredW="282" measuredH="552" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="67" controlTypeID="__group__" x="1240" y="161" w="282" h="552" measuredW="282" measuredH="552" zOrder="6" locked="false" isInGroup="-1">
       <groupChildrenDescriptors>
         <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="0" y="42" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="67">
           <controlProperties>
@@ -294,6 +243,65 @@
       <controlProperties>
         <src>./assets/symbols.bmml#Home Screen</src>
       </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="__group__" x="884" y="162" w="282" h="558" measuredW="282" measuredH="558" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="0" w="282" h="558" measuredW="282" measuredH="558" zOrder="0" locked="false" isInGroup="71">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="0" y="48" w="-1" h="-1" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="0">
+              <controlProperties>
+                <bgPattern>topOnly</bgPattern>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::SubTitle" x="58" y="0" w="-1" h="-1" measuredW="165" measuredH="33" zOrder="1" locked="false" isInGroup="0">
+              <controlProperties>
+                <text>Search%20Screen</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::PointyButton" x="31" y="152" w="-1" h="-1" measuredW="50" measuredH="27" zOrder="2" locked="false" isInGroup="0">
+              <controlProperties>
+                <direction>left</direction>
+                <text>Back</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::PointyButton" x="193" y="151" w="-1" h="-1" measuredW="54" measuredH="27" zOrder="3" locked="false" isInGroup="0">
+              <controlProperties>
+                <direction>center</direction>
+                <text>Home</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="33" y="196" w="215" h="213" measuredW="215" measuredH="213" zOrder="1" locked="false" isInGroup="71">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhoneMenu" x="0" y="0" w="-1" h="-1" measuredW="215" measuredH="213" zOrder="0" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>What%20are%20you%20looing%20for%3F%0A__%0AWhere%20are%20you%20located%3F%0A__%0AHow%20far%20away%3F%0A__%0A__</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="16" y="36" w="183" h="-1" measuredW="37" measuredH="27" zOrder="1" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Bed</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::ComboBox" x="16" y="154" w="183" h="-1" measuredW="107" measuredH="23" zOrder="2" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>5%20Miles%20Away</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="78" y="181" w="-1" h="-1" measuredW="66" measuredH="27" zOrder="3" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Search</text>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::ComboBox" x="16" y="94" w="183" h="-1" measuredW="127" measuredH="23" zOrder="4" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Current%20Location</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
     </control>
   </controls>
 </mockup>
