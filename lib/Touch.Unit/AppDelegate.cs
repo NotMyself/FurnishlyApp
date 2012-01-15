@@ -29,7 +29,7 @@ namespace MonoTouch.NUnit {
 			runner = new TouchRunner (window);
 
 			// tests can be inside the main assembly
-			runner.Add (Assembly.GetExecutingAssembly ());
+			//runner.Add (Assembly.GetExecutingAssembly ());
 			// otherwise you need to ensure that the test assemblies will 
 			// become part of the app bundle
 			runner.Add (typeof (Furnishly.Tests.Test_Reality).Assembly);
