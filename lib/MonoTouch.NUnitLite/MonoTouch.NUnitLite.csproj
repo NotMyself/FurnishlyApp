@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9A9B24AF-1103-43D4-8EC0-9EC0155322FC}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NUnitLite</RootNamespace>
+    <AssemblyName>NUnitLite</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;NUNITLITE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>NUNITLITE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="TouchRunner\TestCaseElement.cs" />
+    <Compile Include="TouchRunner\TestElement.cs" />
+    <Compile Include="TouchRunner\TestSuiteElement.cs" />
+    <Compile Include="TouchRunner\TouchRunner.cs" />
+    <Compile Include="TouchRunner\TcpTextWriter.cs" />
+    <Compile Include="TouchRunner\TouchOptions.cs" />
+    <Compile Include="TouchRunner\TestResultElement.cs" />
+    <Compile Include="NUnitLite\Constraints\AttributeConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\BasicConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\BinaryOperations.cs" />
+    <Compile Include="NUnitLite\Constraints\CollectionConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\ComparisonAdapter.cs" />
+    <Compile Include="NUnitLite\Constraints\ComparisonConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\Constraint.cs" />
+    <Compile Include="NUnitLite\Constraints\ConstraintBuilder.cs" />
+    <Compile Include="NUnitLite\Constraints\ConstraintExpression.cs" />
+    <Compile Include="NUnitLite\Constraints\ConstraintExpressionBase.cs" />
+    <Compile Include="NUnitLite\Constraints\ConstraintFactory.cs" />
+    <Compile Include="NUnitLite\Constraints\ConstraintOperators.cs" />
+    <Compile Include="NUnitLite\Constraints\ContainsConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\EmptyConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\EqualConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\EqualityAdapter.cs" />
+    <Compile Include="NUnitLite\Constraints\FloatingPointNumerics.cs" />
+    <Compile Include="NUnitLite\Constraints\IResolveConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\MessageWriter.cs" />
+    <Compile Include="NUnitLite\Constraints\MsgUtils.cs" />
+    <Compile Include="NUnitLite\Constraints\Numerics.cs" />
+    <Compile Include="NUnitLite\Constraints\NUnitComparer.cs" />
+    <Compile Include="NUnitLite\Constraints\NUnitEqualityComparer.cs" />
+    <Compile Include="NUnitLite\Constraints\PathConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\PredicateConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\PrefixConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\PropertyConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\RangeConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\ResolvableConstraintExpression.cs" />
+    <Compile Include="NUnitLite\Constraints\SameAsConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\SerializableConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\StringConstraints.cs" />
+    <Compile Include="NUnitLite\Constraints\ThrowsConstraint.cs" />
+    <Compile Include="NUnitLite\Constraints\Tolerance.cs" />
+    <Compile Include="NUnitLite\Constraints\TypeConstraints.cs" />
+    <Compile Include="NUnitLite\Framework\Assert.cs" />
+    <Compile Include="NUnitLite\Framework\AssertionException.cs" />
+    <Compile Include="NUnitLite\Framework\AssertionHelper.cs" />
+    <Compile Include="NUnitLite\Framework\Contains.cs" />
+    <Compile Include="NUnitLite\Framework\DescriptionAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\ExpectedExceptionAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\GlobalSettings.cs" />
+    <Compile Include="NUnitLite\Framework\Has.cs" />
+    <Compile Include="NUnitLite\Framework\IExpectException.cs" />
+    <Compile Include="NUnitLite\Framework\IgnoreAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\IgnoreException.cs" />
+    <Compile Include="NUnitLite\Framework\InconclusiveException.cs" />
+    <Compile Include="NUnitLite\Framework\Is.cs" />
+    <Compile Include="NUnitLite\Framework\Iz.cs" />
+    <Compile Include="NUnitLite\Framework\NUnitLiteException.cs" />
+    <Compile Include="NUnitLite\Framework\PropertyAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\RequiredAddinAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\SetUpAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\StackFilter.cs" />
+    <Compile Include="NUnitLite\Framework\SuccessException.cs" />
+    <Compile Include="NUnitLite\Framework\TearDownAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\TestAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\TestFixtureAttribute.cs" />
+    <Compile Include="NUnitLite\Framework\TextMessageWriter.cs" />
+    <Compile Include="NUnitLite\Framework\Throws.cs" />
+    <Compile Include="NUnitLite\Runner\CommandLineOptions.cs" />
+    <Compile Include="NUnitLite\Runner\ConsoleWriter.cs" />
+    <Compile Include="NUnitLite\Runner\DebugWriter.cs" />
+    <Compile Include="NUnitLite\Runner\ResultSummary.cs" />
+    <Compile Include="NUnitLite\Runner\TcpWriter.cs" />
+    <Compile Include="NUnitLite\Runner\TestLoader.cs" />
+    <Compile Include="NUnitLite\Runner\TestRunner.cs" />
+    <Compile Include="NUnitLite\Runner\TextUI.cs" />
+    <Compile Include="NUnitLite\AssemblyInfo.cs" />
+    <Compile Include="NUnitLite\Env.cs" />
+    <Compile Include="NUnitLite\ITest.cs" />
+    <Compile Include="NUnitLite\NullListener.cs" />
+    <Compile Include="NUnitLite\Reflect.cs" />
+    <Compile Include="NUnitLite\TestCase.cs" />
+    <Compile Include="NUnitLite\TestListener.cs" />
+    <Compile Include="NUnitLite\TestResult.cs" />
+    <Compile Include="NUnitLite\TestSuite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TouchRunner\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
