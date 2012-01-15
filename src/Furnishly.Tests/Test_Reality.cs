@@ -13,7 +13,7 @@ namespace Furnishly.Tests
 		[Test]
 		public void ensure_universal_constant()
 		{
-			Assert.That(true, Is.False); 
+			Assert.That(true, Is.True); 
 		}
 	}
 }
