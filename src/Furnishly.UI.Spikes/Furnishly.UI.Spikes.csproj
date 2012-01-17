@@ -67,20 +67,18 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Furnishly.UI.SpikesViewController.cs" />
-    <Compile Include="Furnishly.UI.SpikesViewController.designer.cs">
-      <DependentUpon>Furnishly.UI.SpikesViewController.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="Furnishly.UI.SpikesViewController_iPhone.xib" />
-    <InterfaceDefinition Include="Furnishly.UI.SpikesViewController_iPad.xib" />
+    <Compile Include="SpikeViewer.cs" />
+    <Compile Include="MapViewSpikes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Furnishly.UI\Furnishly.UI.csproj">
       <Project>{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}</Project>
       <Name>Furnishly.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -14,8 +14,8 @@ namespace Furnishly.UI.Spikes
 	{
 		// class-level declarations
 		UIWindow window;
-		Furnishly_UI_SpikesViewController viewController;
-
+		SpikeViewer viewer;
+		
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
 		// method you should instantiate the window, load the UI into it and then make the window
@@ -26,11 +26,10 @@ namespace Furnishly.UI.Spikes
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			viewer = new SpikeViewer(window);	
 			
-			viewController = new Furnishly_UI_SpikesViewController ();
-			window.RootViewController = viewController;
+			window.RootViewController = new UINavigationController(viewer.GetViewController());
 			window.MakeKeyAndVisible ();
-			
 			return true;
 		}
 	}

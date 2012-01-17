@@ -169,6 +169,6 @@ Global
 		{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50} = {504E0892-33E5-40D2-912C-45531EA9BA67}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = lib\Touch.Unit\Touch.Unit.csproj
+		StartupItem = src\Furnishly.UI.Spikes\Furnishly.UI.Spikes.csproj
 	EndGlobalSection
 EndGlobal
