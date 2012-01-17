@@ -25,21 +25,32 @@ namespace Furnishly.UI
 			base.ViewDidLoad();
 			
 			var currentLocation = locationService.GetCurrentLocation();
+			var visibleRegion = BuildVisibleRegion(currentLocation);
 			
-			mapView = new MKMapView()
-			{
-				ShowsUserLocation = true
-			};
-			
-			mapView.SizeToFit();
-			mapView.Frame = new RectangleF(0, 0, this.View.Frame.Width, this.View.Frame.Height);
-			MKCoordinateSpan span = new MKCoordinateSpan(0.2,0.2);
-			MKCoordinateRegion region = new MKCoordinateRegion(currentLocation,span);
-			mapView.SetRegion(region, true);
+			mapView = BuildMapView(true);
+			mapView.SetRegion(visibleRegion, true);
 			
 			this.View.AddSubview(mapView);
+		}
+		
+		private MKMapView BuildMapView(bool showUserLocation)
+		{
+			var view = new MKMapView()
+			{
+				ShowsUserLocation = showUserLocation
+			};
 			
+			view.SizeToFit();
+			view.Frame = new RectangleF(0, 0, this.View.Frame.Width, this.View.Frame.Height);
+			return view;
+		}
+		
+		private MKCoordinateRegion BuildVisibleRegion(CLLocationCoordinate2D currentLocation)
+		{
+			var span = new MKCoordinateSpan(0.2,0.2);
+			var region = new MKCoordinateRegion(currentLocation,span);
 			
+			return region;
 		}
 	}
 }

@@ -11,7 +11,6 @@ namespace Furnishly.UI
 		public LocationService()
 		{
 			locationManager = new CLLocationManager();
-			locationManager.StartUpdatingLocation();
 		}
 		
 		public CLLocationCoordinate2D GetCurrentLocation()
@@ -19,9 +18,9 @@ namespace Furnishly.UI
 			//dirty for now just to get some info.
 			locationManager.StartUpdatingLocation();
 			while(locationManager.Location == null);
-			var location = locationManager.Location.Coordinate;
 			locationManager.StopUpdatingLocation();
-			return location;
+			
+			return locationManager.Location.Coordinate;
 		}
 	}
 }
