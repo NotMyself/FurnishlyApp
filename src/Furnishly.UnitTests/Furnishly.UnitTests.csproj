@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{335529BC-0B6A-4E82-A146-87E9EC70E436}</ProjectGuid>
+    <ProjectGuid>{2C2653D3-5F37-4079-B4AC-49B604393D52}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Furnishly.UI.Spikes</RootNamespace>
-    <AssemblyName>FurnishlyUISpikes</AssemblyName>
+    <RootNamespace>Furnishly.UnitTests</RootNamespace>
+    <AssemblyName>FurnishlyUnitTests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="MonoTouch.NUnitLite" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -68,14 +68,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="SpikeViewer.cs" />
-    <Compile Include="MapViewSpikes.cs" />
+    <Compile Include="Test_Reality.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Furnishly.UI\Furnishly.UI.csproj">
-      <Project>{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}</Project>
-      <Name>Furnishly.UI</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
