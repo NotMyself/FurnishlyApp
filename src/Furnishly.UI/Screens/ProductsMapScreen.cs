@@ -10,7 +10,11 @@ namespace Furnishly.UI
 	{
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
-			this.Title = "Map";
+			TabBarItem = new UITabBarItem 
+			{ 
+				Title = "Map", 
+				Image = UIImage.FromFile("Images/tabmap.png")
+			};
 		}
 		
 		public override void DidReceiveMemoryWarning()

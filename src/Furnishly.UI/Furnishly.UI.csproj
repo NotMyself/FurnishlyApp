@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Images\logo.gif" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -97,5 +96,15 @@
     <InterfaceDefinition Include="Screens\StartScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsMapScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsListScreen.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\tabmap.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\icon-114.png" />
+    <Content Include="Images\icon-72.png" />
+    <Content Include="Images\icon-29.png" />
+    <Content Include="Images\icon-50.png" />
+    <Content Include="Images\icon-57.png" />
+    <Content Include="Images\icon-58.png" />
   </ItemGroup>
 </Project>
