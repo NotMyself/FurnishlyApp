@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="Images\logo.gif" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -71,9 +72,30 @@
     <Compile Include="ProductsViewController.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\ProductsService.cs" />
+    <Compile Include="Screens\StartScreen.cs" />
+    <Compile Include="Screens\StartScreen.designer.cs">
+      <DependentUpon>StartScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\ProductsMapScreen.cs" />
+    <Compile Include="Screens\ProductsMapScreen.designer.cs">
+      <DependentUpon>ProductsMapScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\ProductsListScreen.cs" />
+    <Compile Include="Screens\ProductsListScreen.designer.cs">
+      <DependentUpon>ProductsListScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppViewController.cs" />
+    <Compile Include="ProductSearchController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Screens\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Screens\StartScreen.xib" />
+    <InterfaceDefinition Include="Screens\ProductsMapScreen.xib" />
+    <InterfaceDefinition Include="Screens\ProductsListScreen.xib" />
   </ItemGroup>
 </Project>

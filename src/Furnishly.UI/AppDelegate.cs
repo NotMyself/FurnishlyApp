@@ -9,11 +9,12 @@ namespace Furnishly.UI
 	// The UIApplicationDelegate for the application. This class is responsible for launching the 
 	// User Interface of the application, as well as listening (and optionally responding) to 
 	// application events from iOS.
-	[Register ("AppDelegate")]
+	[Register("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		// class-level declarations
 		UIWindow window;
+		UINavigationController rootNavigationController;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -22,16 +23,16 @@ namespace Furnishly.UI
 		//
 		// You have 17 seconds to return from this method, or iOS will terminate your application.
 		//
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-			// create a new window instance based on the screen size
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			var homeScreen = new StartScreen();
+			window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			this.rootNavigationController = new UINavigationController();
+			this.rootNavigationController.PushViewController(homeScreen, false);
+			this.window.RootViewController = this.rootNavigationController;
 			
-			// If you have defined a view, add it here:
-			// window.AddSubview (navigationController.View);
-			
-			// make the window visible
-			window.MakeKeyAndVisible ();
+			window.MakeKeyAndVisible();
 			
 			return true;
 		}

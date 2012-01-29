@@ -7,7 +7,7 @@ namespace Furnishly.UnitTests
 {
 	[TestFixture]
 	// we want the test to be availble if we use the linker
-	[Preserve (AllMembers = true)]
+	[Preserve(AllMembers = true)]
 	public class Test_Reality
 	{
 		[Test]
