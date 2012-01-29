@@ -8,11 +8,18 @@ using MonoTouch.Foundation;
 
 namespace Furnishly.UI
 {
-	[Register("ProductsListScreen")]
+	[Register ("ProductsListScreen")]
 	partial class ProductsListScreen
 	{
-		void ReleaseDesignerOutlets()
+		[Outlet]
+		MonoTouch.UIKit.UITableView productsList { get; set; }
+		
+		void ReleaseDesignerOutlets ()
 		{
+			if (productsList != null) {
+				productsList.Dispose ();
+				productsList = null;
+			}
 		}
 	}
 }
