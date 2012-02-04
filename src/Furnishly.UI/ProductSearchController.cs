@@ -21,8 +21,12 @@ namespace Furnishly.UI
 			base.ViewDidLoad();
 			if(locationService == null)
 				locationService = new LocationService();
+			
 			var productsListScreen = new ProductsListScreen();
-			var productsMapScreen = new ProductsMapScreen() { GetVisibleRegion = BuildVisibleRegion };
+			var productsMapScreen = new ProductsMapScreen() 
+									{ 
+										GetCurrentLocation = GetCurrentLocation 
+									};
 			
 			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
 		}
@@ -39,13 +43,9 @@ namespace Furnishly.UI
 			this.NavigationController.SetNavigationBarHidden(false, animated);
 		}
 		
-		private MKCoordinateRegion BuildVisibleRegion()
+		private CLLocationCoordinate2D GetCurrentLocation()
 		{
-			var currentLocation = locationService.GetCurrentLocation();
-			var span = new MKCoordinateSpan(0.2,0.2);
-			var region = new MKCoordinateRegion(currentLocation,span);
-			
-			return region;
+			return locationService.GetCurrentLocation();
 		}
 	}
 }

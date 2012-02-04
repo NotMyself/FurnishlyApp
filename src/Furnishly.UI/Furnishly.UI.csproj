@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="AppViewController.cs" />
     <Compile Include="ProductSearchController.cs" />
+    <Compile Include="Model\UserAnnotation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

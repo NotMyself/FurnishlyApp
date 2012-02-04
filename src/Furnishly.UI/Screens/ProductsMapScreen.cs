@@ -8,8 +8,11 @@ using MonoTouch.CoreLocation;
 
 namespace Furnishly.UI
 {
+	
 	public partial class ProductsMapScreen : UIViewController
 	{
+		private MapDelegate mapDelegate;
+		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
 			TabBarItem = new UITabBarItem 
@@ -19,40 +22,76 @@ namespace Furnishly.UI
 			};
 		}
 		
-		public Func<MKCoordinateRegion> GetVisibleRegion;
-		
-		
-		public override void DidReceiveMemoryWarning()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning();
-			
-			// Release any cached data, images, etc that aren't in use.
-		}
+		public Func<CLLocationCoordinate2D> GetCurrentLocation;
 		
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
-			this.mapView.SetRegion(GetVisibleRegion(), true);
+			//this.mapDelegate = new MapDelegate();
+			//this.mapView.Delegate = this.mapDelegate;
+			
+			SetVisibleRegion();
+			AnnotateUsersCurrentLocation();
+		
 		}
 		
 		public override void ViewDidUnload()
 		{
 			base.ViewDidUnload();
-			
-			// Clear any references to subviews of the main view in order to
-			// allow the Garbage Collector to collect them sooner.
-			//
-			// e.g. myOutlet.Dispose(); myOutlet = null;
-			
 			ReleaseDesignerOutlets();
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 		{
-			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+		}
+		
+		private void AnnotateUsersCurrentLocation()
+		{
+			var location = GetCurrentLocation();
+			this.mapView.AddAnnotation(new[]{ new UserAnnotation(location) });
+		}
+		
+		private void SetVisibleRegion()
+		{
+			this.mapView.SetRegion(GetVisibleRegion(), true);
+		}	
+		
+		private MKCoordinateRegion GetVisibleRegion()
+		{
+			var currentLocation = GetCurrentLocation();
+			var span = new MKCoordinateSpan(0.2,0.2);
+			var region = new MKCoordinateRegion(currentLocation,span);
+			
+			return region;
+		}
+		
+		public class MapDelegate : MKMapViewDelegate 
+		{
+			public override MKAnnotationView GetViewForAnnotation(MKMapView mapView, NSObject annotation)
+			{
+				var userAnnotation = annotation as UserAnnotation;
+				if(userAnnotation != null)
+					return getViewForUserAnnotation(mapView, userAnnotation);
+				
+				throw new Exception();
+			}
+			
+			private MKAnnotationView getViewForUserAnnotation(MKMapView mapView, UserAnnotation annotation)
+			{
+				var annotationId = "userAnnotation";
+				var annotationView = mapView.DequeueReusableAnnotation (annotationId) as MKPinAnnotationView;
+                if (annotationView == null)
+                    annotationView = new MKPinAnnotationView (annotation, annotationId);
+                
+                annotationView.PinColor = MKPinAnnotationColor.Green;
+                annotationView.CanShowCallout = true;
+                annotationView.Draggable = true;
+                annotationView.RightCalloutAccessoryView = UIButton.FromType (UIButtonType.DetailDisclosure);
+				
+				return annotationView;
+                
+			}
 		}
 	}
 }
