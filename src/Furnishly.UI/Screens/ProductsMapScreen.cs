@@ -3,6 +3,8 @@ using System.Drawing;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.MapKit;
+using MonoTouch.CoreLocation;
 
 namespace Furnishly.UI
 {
@@ -17,6 +19,9 @@ namespace Furnishly.UI
 			};
 		}
 		
+		public Func<MKCoordinateRegion> GetVisibleRegion;
+		
+		
 		public override void DidReceiveMemoryWarning()
 		{
 			// Releases the view if it doesn't have a superview.
@@ -28,8 +33,8 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			
-			// Perform any additional setup after loading the view, typically from a nib.
+
+			this.mapView.SetRegion(GetVisibleRegion(), true);
 		}
 		
 		public override void ViewDidUnload()

@@ -8,11 +8,18 @@ using MonoTouch.Foundation;
 
 namespace Furnishly.UI
 {
-	[Register("ProductsMapScreen")]
+	[Register ("ProductsMapScreen")]
 	partial class ProductsMapScreen
 	{
-		void ReleaseDesignerOutlets()
+		[Outlet]
+		MonoTouch.MapKit.MKMapView mapView { get; set; }
+		
+		void ReleaseDesignerOutlets ()
 		{
+			if (mapView != null) {
+				mapView.Dispose ();
+				mapView = null;
+			}
 		}
 	}
 }

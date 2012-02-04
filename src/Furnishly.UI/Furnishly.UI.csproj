@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ProductsViewController.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Screens\StartScreen.cs" />
@@ -91,6 +90,7 @@
     <Folder Include="Services\" />
     <Folder Include="Screens\" />
     <Folder Include="Images\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\StartScreen.xib" />

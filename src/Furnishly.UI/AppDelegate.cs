@@ -15,6 +15,7 @@ namespace Furnishly.UI
 		// class-level declarations
 		UIWindow window;
 		UINavigationController rootNavigationController;
+		
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
