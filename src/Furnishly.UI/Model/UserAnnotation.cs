@@ -8,7 +8,7 @@ namespace Furnishly.UI
 	public class UserAnnotation: MKAnnotation
 	{
 		private CLLocationCoordinate2D coordinate;
-		public UserAnnotation(CLLocationCoordinate2D location)
+		public UserAnnotation(CLLocationCoordinate2D coordinate)
 		{
 			this.coordinate = coordinate;
 		}

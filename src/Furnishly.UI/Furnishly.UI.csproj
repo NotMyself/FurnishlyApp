@@ -75,7 +75,7 @@
       <DependentUpon>StartScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\ProductsMapScreen.cs" />
-    <Compile Include="Screens\ProductsMapScreen.designer.cs">
+	<Compile Include="Screens\ProductsMapScreen.designer.cs">
       <DependentUpon>ProductsMapScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\ProductsListScreen.cs" />

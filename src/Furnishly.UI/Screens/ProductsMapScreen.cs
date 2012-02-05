@@ -11,7 +11,7 @@ namespace Furnishly.UI
 	
 	public partial class ProductsMapScreen : UIViewController
 	{
-		private MapDelegate mapDelegate;
+		public Func<CLLocationCoordinate2D> GetCurrentLocation;
 		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
@@ -22,23 +22,12 @@ namespace Furnishly.UI
 			};
 		}
 		
-		public Func<CLLocationCoordinate2D> GetCurrentLocation;
-		
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			//this.mapDelegate = new MapDelegate();
-			//this.mapView.Delegate = this.mapDelegate;
-			
+			this.mapView.GetViewForAnnotation += GetViewForAnnotation;
 			SetVisibleRegion();
 			AnnotateUsersCurrentLocation();
-		
-		}
-		
-		public override void ViewDidUnload()
-		{
-			base.ViewDidUnload();
-			ReleaseDesignerOutlets();
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
@@ -49,7 +38,7 @@ namespace Furnishly.UI
 		private void AnnotateUsersCurrentLocation()
 		{
 			var location = GetCurrentLocation();
-			this.mapView.AddAnnotation(new[]{ new UserAnnotation(location) });
+			this.mapView.AddAnnotation(new[] {new UserAnnotation(location)});
 		}
 		
 		private void SetVisibleRegion()
@@ -66,33 +55,31 @@ namespace Furnishly.UI
 			return region;
 		}
 		
-		public class MapDelegate : MKMapViewDelegate 
+		private MKAnnotationView GetViewForAnnotation(MKMapView mapView, NSObject annotation)
 		{
-			public override MKAnnotationView GetViewForAnnotation(MKMapView mapView, NSObject annotation)
-			{
-				var userAnnotation = annotation as UserAnnotation;
-				if(userAnnotation != null)
-					return getViewForUserAnnotation(mapView, userAnnotation);
-				
-				throw new Exception();
-			}
+			var userAnnotation = annotation as UserAnnotation;
+			if(userAnnotation != null)
+				return getViewForUserAnnotation(mapView, userAnnotation);
 			
-			private MKAnnotationView getViewForUserAnnotation(MKMapView mapView, UserAnnotation annotation)
-			{
-				var annotationId = "userAnnotation";
-				var annotationView = mapView.DequeueReusableAnnotation (annotationId) as MKPinAnnotationView;
-                if (annotationView == null)
-                    annotationView = new MKPinAnnotationView (annotation, annotationId);
-                
-                annotationView.PinColor = MKPinAnnotationColor.Green;
-                annotationView.CanShowCallout = true;
-                annotationView.Draggable = true;
-                annotationView.RightCalloutAccessoryView = UIButton.FromType (UIButtonType.DetailDisclosure);
-				
-				return annotationView;
-                
-			}
+			throw new Exception();
 		}
+			
+		private MKAnnotationView getViewForUserAnnotation(MKMapView mapView, UserAnnotation annotation)
+		{
+			var annotationId = "userAnnotation";
+			var annotationView = mapView.DequeueReusableAnnotation (annotationId) as MKPinAnnotationView;
+            if (annotationView == null)
+                annotationView = new MKPinAnnotationView (annotation, annotationId);
+            
+            annotationView.PinColor = MKPinAnnotationColor.Green;
+            annotationView.CanShowCallout = true;
+            annotationView.Draggable = true;
+            annotationView.RightCalloutAccessoryView = UIButton.FromType (UIButtonType.DetailDisclosure);
+			
+			return annotationView;
+            
+		}
+		
 	}
 }
 

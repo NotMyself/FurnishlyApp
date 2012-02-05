@@ -6,7 +6,7 @@ namespace Furnishly.UI
 {
 	public class LocationService
 	{
-		private CLLocationManager locationManager;
+		private static CLLocationManager locationManager;
 		
 		public LocationService()
 		{
@@ -19,6 +19,7 @@ namespace Furnishly.UI
 			locationManager.StartUpdatingLocation();
 			while(locationManager.Location == null);
 			locationManager.StopUpdatingLocation();
+			Console.WriteLine("location: {0} {1}", locationManager.Location.Coordinate.Latitude, locationManager.Location.Coordinate.Longitude);
 			
 			return locationManager.Location.Coordinate;
 		}
