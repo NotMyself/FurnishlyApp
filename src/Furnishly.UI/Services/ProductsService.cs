@@ -19,8 +19,14 @@ namespace Furnishly.UI
 				{
 					Title = "Foo",
 					Price = "$300.00",
-					Location = new CLLocationCoordinate2D(location.Latitude - 0.1, location.Longitude + 0.1)
-				}
+					Location = new CLLocationCoordinate2D(location.Latitude - 0.001, location.Longitude + 0.001)
+				},
+				new Product
+				{
+					Title = "Bar",
+					Price = "$300.00",
+					Location = new CLLocationCoordinate2D(location.Latitude + 0.001, location.Longitude - 0.001)
+				},
 			};
 		}
 	}

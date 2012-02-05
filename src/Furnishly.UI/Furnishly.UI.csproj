@@ -88,6 +88,10 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductAnnotation.cs" />
     <Compile Include="Utility\StringExtensions.cs" />
+    <Compile Include="Screens\ProductScreen.cs" />
+    <Compile Include="Screens\ProductScreen.designer.cs">
+      <DependentUpon>ProductScreen.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,6 +105,7 @@
     <InterfaceDefinition Include="Screens\StartScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsMapScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsListScreen.xib" />
+    <InterfaceDefinition Include="Screens\ProductScreen.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\tabmap.png" />

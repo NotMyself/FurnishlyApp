@@ -28,9 +28,19 @@ namespace Furnishly.UI
 		{
 			base.ViewDidLoad();
 			this.mapView.GetViewForAnnotation += GetViewForAnnotation;
+			this.mapView.CalloutAccessoryControlTapped += ViewSelectedProduct;
 			SetVisibleRegion();
 			AnnotateUsersCurrentLocation();
 			AnnotateProductsNearBy();
+		}
+
+		void ViewSelectedProduct(object sender, MKMapViewAccessoryTappedEventArgs e)
+		{
+			var annotation = e.View.Annotation as ProductAnnotation;
+			var product = annotation.Product;
+			
+			var productScreen = new ProductScreen { Product = product };
+				this.NavigationController.PushViewController(productScreen, true);
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
@@ -62,7 +72,7 @@ namespace Furnishly.UI
 		private MKCoordinateRegion GetVisibleRegion()
 		{
 			var currentLocation = GetCurrentLocation();
-			var span = new MKCoordinateSpan(0.2,0.2);
+			var span = new MKCoordinateSpan(0.02,0.02);
 			var region = new MKCoordinateRegion(currentLocation,span);
 			
 			return region;
