@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -12,6 +13,7 @@ namespace Furnishly.UI
 	public partial class ProductsMapScreen : UIViewController
 	{
 		public Func<CLLocationCoordinate2D> GetCurrentLocation;
+		public Func<CLLocationCoordinate2D,IEnumerable<Product>> GetProductsNear;
 		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
@@ -28,6 +30,7 @@ namespace Furnishly.UI
 			this.mapView.GetViewForAnnotation += GetViewForAnnotation;
 			SetVisibleRegion();
 			AnnotateUsersCurrentLocation();
+			AnnotateProductsNearBy();
 		}
 		
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
@@ -38,7 +41,17 @@ namespace Furnishly.UI
 		private void AnnotateUsersCurrentLocation()
 		{
 			var location = GetCurrentLocation();
-			this.mapView.AddAnnotation(new[] {new UserAnnotation(location)});
+			this.mapView.AddAnnotation(new UserAnnotation(location));
+		}
+		
+		private void AnnotateProductsNearBy()
+		{
+			var location = GetCurrentLocation();
+			var products = GetProductsNear(location);
+			
+			foreach (var product in products) 
+				this.mapView.AddAnnotation(new ProductAnnotation(product));	
+			
 		}
 		
 		private void SetVisibleRegion()
@@ -57,29 +70,41 @@ namespace Furnishly.UI
 		
 		private MKAnnotationView GetViewForAnnotation(MKMapView mapView, NSObject annotation)
 		{
-			var userAnnotation = annotation as UserAnnotation;
-			if(userAnnotation != null)
-				return getViewForUserAnnotation(mapView, userAnnotation);
-			
-			throw new Exception();
+			if(annotation is UserAnnotation)
+				return getViewForUserAnnotation(mapView, annotation as UserAnnotation);
+			else
+				return getViewForProductAnnotation(mapView, annotation as ProductAnnotation);
 		}
 			
 		private MKAnnotationView getViewForUserAnnotation(MKMapView mapView, UserAnnotation annotation)
 		{
 			var annotationId = "userAnnotation";
-			var annotationView = mapView.DequeueReusableAnnotation (annotationId) as MKPinAnnotationView;
-            if (annotationView == null)
-                annotationView = new MKPinAnnotationView (annotation, annotationId);
-            
-            annotationView.PinColor = MKPinAnnotationColor.Green;
-            annotationView.CanShowCallout = true;
-            annotationView.Draggable = true;
-            annotationView.RightCalloutAccessoryView = UIButton.FromType (UIButtonType.DetailDisclosure);
-			
-			return annotationView;
+			return getAvaiableAnnotationView(annotationId, MKPinAnnotationColor.Green, annotation);
             
 		}
 		
+		private MKAnnotationView getViewForProductAnnotation(MKMapView mapView, ProductAnnotation annotation)
+		{
+			var annotationId = "ProductAnnotation";
+			var annotationView = getAvaiableAnnotationView(annotationId,MKPinAnnotationColor.Red, annotation);
+			
+            annotationView.RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure);
+			
+			return annotationView;
+		}
+		
+		private MKAnnotationView getAvaiableAnnotationView(string annotationId, MKPinAnnotationColor penColor, NSObject annotation)
+		{
+			var annotationView = mapView.DequeueReusableAnnotation(annotationId) as MKPinAnnotationView;
+            if (annotationView == null)
+                annotationView = new MKPinAnnotationView(annotation, annotationId);
+            
+            annotationView.PinColor = penColor;
+            annotationView.CanShowCallout = true;
+            annotationView.Draggable = true;
+			
+			return annotationView;
+		}
 	}
 }
 

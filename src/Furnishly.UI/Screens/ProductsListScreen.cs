@@ -1,13 +1,18 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.CoreLocation;
 
 namespace Furnishly.UI
 {
 	public partial class ProductsListScreen : UIViewController
 	{
+		public Func<CLLocationCoordinate2D> GetCurrentLocation;
+		public Func<CLLocationCoordinate2D,IEnumerable<Product>> GetProductsNear;
+		
 		public ProductsListScreen() : base("ProductsListScreen", null)
 		{
 			TabBarItem = new UITabBarItem 

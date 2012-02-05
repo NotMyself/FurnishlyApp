@@ -75,7 +75,7 @@
       <DependentUpon>StartScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\ProductsMapScreen.cs" />
-	<Compile Include="Screens\ProductsMapScreen.designer.cs">
+    <Compile Include="Screens\ProductsMapScreen.designer.cs">
       <DependentUpon>ProductsMapScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\ProductsListScreen.cs" />
@@ -85,6 +85,9 @@
     <Compile Include="AppViewController.cs" />
     <Compile Include="ProductSearchController.cs" />
     <Compile Include="Model\UserAnnotation.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductAnnotation.cs" />
+    <Compile Include="Utility\StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +95,7 @@
     <Folder Include="Screens\" />
     <Folder Include="Images\" />
     <Folder Include="Model\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Screens\StartScreen.xib" />
