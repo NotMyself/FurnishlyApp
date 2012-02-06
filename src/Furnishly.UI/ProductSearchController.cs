@@ -27,35 +27,39 @@ namespace Furnishly.UI
 			if(productsService == null)
 				productsService = new ProductsService();
 			
-			var productsListScreen = new ProductsListScreen();
-			var productsMapScreen = new ProductsMapScreen() 
+			var productsListScreen = new ProductsListScreen
+									{
+										GetProducts = GetProducts	
+									};
+			var productsMapScreen = new ProductsMapScreen 
 									{ 
 										GetCurrentLocation = GetCurrentLocation,
-										GetProductsNear = GetProductsNear
+										GetProducts = GetProducts
 									};
 			
 			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
 		}
 		
-		public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			this.NavigationController.SetNavigationBarHidden(true, animated);
-		}
-		
-		public override void ViewWillDisappear(bool animated)
-		{
-			base.ViewWillDisappear(animated);
-			this.NavigationController.SetNavigationBarHidden(false, animated);
-		}
+//		public override void ViewWillAppear(bool animated)
+//		{
+//			base.ViewWillAppear(animated);
+//			this.NavigationController.SetNavigationBarHidden(true, animated);
+//		}
+//		
+//		public override void ViewWillDisappear(bool animated)
+//		{
+//			base.ViewWillDisappear(animated);
+//			this.NavigationController.SetNavigationBarHidden(false, animated);
+//		}
 		
 		private CLLocationCoordinate2D GetCurrentLocation()
 		{
 			return locationService.GetCurrentLocation();
 		}
 		
-		private IEnumerable<Product> GetProductsNear(CLLocationCoordinate2D location)
+		private IEnumerable<Product> GetProducts()
 		{
+			var location = locationService.GetCurrentLocation();
 			return productsService.GetProductsNear(location);
 		}
 	}

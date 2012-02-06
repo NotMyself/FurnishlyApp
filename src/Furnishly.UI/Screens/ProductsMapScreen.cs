@@ -13,7 +13,7 @@ namespace Furnishly.UI
 	public partial class ProductsMapScreen : UIViewController
 	{
 		public Func<CLLocationCoordinate2D> GetCurrentLocation;
-		public Func<CLLocationCoordinate2D,IEnumerable<Product>> GetProductsNear;
+		public Func<IEnumerable<Product>> GetProducts;
 		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
@@ -56,8 +56,7 @@ namespace Furnishly.UI
 		
 		private void AnnotateProductsNearBy()
 		{
-			var location = GetCurrentLocation();
-			var products = GetProductsNear(location);
+			var products = GetProducts();
 			
 			foreach (var product in products) 
 				this.mapView.AddAnnotation(new ProductAnnotation(product));	

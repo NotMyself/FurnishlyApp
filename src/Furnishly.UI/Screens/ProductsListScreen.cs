@@ -10,8 +10,7 @@ namespace Furnishly.UI
 {
 	public partial class ProductsListScreen : UIViewController
 	{
-		public Func<CLLocationCoordinate2D> GetCurrentLocation;
-		public Func<CLLocationCoordinate2D,IEnumerable<Product>> GetProductsNear;
+		public Func<IEnumerable<Product>> GetProducts;
 		
 		public ProductsListScreen() : base("ProductsListScreen", null)
 		{
@@ -33,6 +32,10 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+			var products = GetProducts();
+			foreach (var product in products) {
+					
+			}
 		}
 		
 		public override void ViewDidUnload()
