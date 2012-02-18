@@ -10,6 +10,7 @@ namespace Furnishly.UI
 	{
 		public StartScreen() : base("StartScreen", null)
 		{
+			
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -23,6 +24,11 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+			//this.btnLocate.Alpha = 0;
+			//this.activityIndicator.Alpha = 0;
+			this.messages.Alpha = 0;
+			
+			this.activityIndicator.StartAnimating();
 			
 			this.btnLocate.TouchUpInside += (sender, e) => {
 				var productSearchController = new ProductSearchController();
