@@ -116,5 +116,10 @@
     <Content Include="Images\icon-50.png" />
     <Content Include="Images\icon-57.png" />
     <Content Include="Images\icon-58.png" />
+    <Content Include="Images\icon-512.png" />
+    <Content Include="Images\launch-960.png" />
+    <Content Include="Default%402x.png" />
+    <Content Include="Images\launch-480.png" />
+    <Content Include="Default.png" />
   </ItemGroup>
 </Project>

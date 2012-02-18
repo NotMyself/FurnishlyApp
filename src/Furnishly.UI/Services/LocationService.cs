@@ -16,12 +16,13 @@ namespace Furnishly.UI
 		public CLLocationCoordinate2D GetCurrentLocation()
 		{
 			//dirty for now just to get some info.
-			locationManager.StartUpdatingLocation();
+			/*locationManager.StartUpdatingLocation();
 			while(locationManager.Location == null);
 			locationManager.StopUpdatingLocation();
 			Console.WriteLine("location: {0} {1}", locationManager.Location.Coordinate.Latitude, locationManager.Location.Coordinate.Longitude);
 			
-			return locationManager.Location.Coordinate;
+			return locationManager.Location.Coordinate;*/
+			return new MonoTouch.CoreLocation.CLLocationCoordinate2D(37.785834, -122.406417);
 		}
 	}
 }
