@@ -20,7 +20,7 @@ namespace Furnishly.UI
 			TabBarItem = new UITabBarItem 
 			{ 
 				Title = "Map", 
-				Image = UIImage.FromFile("Images/tabmap.png")
+				Image = UIImage.FromFile("Images/globe_64.png")
 			};
 		}
 		

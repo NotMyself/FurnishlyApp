@@ -11,7 +11,7 @@ namespace Furnishly.UI
 	{
 		public ProductsService()
 		{
-			Count = 1000;
+			Count = 25;
 		}
 		
 		public int Count { get; set; }

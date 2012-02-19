@@ -108,8 +108,6 @@
     <InterfaceDefinition Include="Screens\ProductScreen.xib" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\tabmap.png" />
-    <Content Include="Images\logo.png" />
     <Content Include="Images\icon-114.png" />
     <Content Include="Images\icon-72.png" />
     <Content Include="Images\icon-29.png" />
@@ -121,5 +119,7 @@
     <Content Include="Default%402x.png" />
     <Content Include="Images\launch-480.png" />
     <Content Include="Default.png" />
+    <Content Include="Images\globe_64.png" />
+    <Content Include="Images\list_64.png" />
   </ItemGroup>
 </Project>
