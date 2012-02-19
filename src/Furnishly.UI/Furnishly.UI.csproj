@@ -123,5 +123,11 @@
     <Content Include="Default.png" />
     <Content Include="Images\globe_64.png" />
     <Content Include="Images\list_64.png" />
+    <Content Include="Images\icon-114-white.png" />
+    <Content Include="Images\icon-29-white.png" />
+    <Content Include="Images\icon-50-white.png" />
+    <Content Include="Images\icon-57-white.png" />
+    <Content Include="Images\icon-58-white.png" />
+    <Content Include="Images\icon-72-white.png" />
   </ItemGroup>
 </Project>

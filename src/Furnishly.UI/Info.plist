@@ -6,9 +6,9 @@
 	<string>Furnishly</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Images/icon-114.png</string>
-		<string>Images/icon-72.png</string>
-		<string>Images/icon-57.png</string>
+		<string>Images/icon-114-white.png</string>
+		<string>Images/icon-72-white.png</string>
+		<string>Images/icon-57-white.png</string>
 		<string>Images/icon-29.png</string>
 		<string>Images/icon-58.png</string>
 		<string>Images/icon-50.png</string>
