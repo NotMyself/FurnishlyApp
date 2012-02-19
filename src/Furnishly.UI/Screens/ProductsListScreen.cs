@@ -81,10 +81,8 @@ namespace Furnishly.UI
             {
         		cell = new UITableViewCell (UITableViewCellStyle.Subtitle, cellId);
         	}
-        	//cell.TextLabel.Font = UIFont.FromName ("Helvetica", 14.0f);
-        	//cell.TextLabel.LineBreakMode = UILineBreakMode.TailTruncation;
+        	cell.TextLabel.LineBreakMode = UILineBreakMode.TailTruncation;
         	cell.TextLabel.Text = products[indexPath.Row].Title;
-        	//cell.DetailTextLabel.Font = UIFont.FromName ("Helvetica", 12.0f);
         	cell.DetailTextLabel.Text = products[indexPath.Row].Price;
 			cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
             return cell;

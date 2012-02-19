@@ -14,6 +14,8 @@
 		<string>Images/icon-50.png</string>
 		<string>Images/icon-512.png</string>
 	</array>
+	<key>MinimumOSVersion</key>
+	<string>5.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
