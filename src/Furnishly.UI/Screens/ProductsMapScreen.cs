@@ -97,6 +97,7 @@ namespace Furnishly.UI
 			var annotationId = "ProductAnnotation";
 			var annotationView = getAvaiableAnnotationView(annotationId,MKPinAnnotationColor.Red, annotation);
 			
+			annotationView.LeftCalloutAccessoryView = new UIWebImageView(annotationView.Frame, annotation.Product.IconImageUri);
             annotationView.RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure);
 			
 			return annotationView;

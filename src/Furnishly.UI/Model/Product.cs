@@ -12,6 +12,7 @@ namespace Furnishly.UI
 		
 		public string Title { get; set; }
 		public string Description { get; set; }
+		public string IconImageUri { get; set; }
 		public string Price { get; set; }
 		public CLLocationCoordinate2D Location { get; set; }
 	}

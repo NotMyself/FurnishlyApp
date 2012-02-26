@@ -14,6 +14,15 @@ namespace Furnishly.UI
 			Count = 25;
 		}
 		
+		private List<string> images = new List<string>
+		{
+			"http://furnishly.com/media/catalog/product/cache/1/small_image/55x55/9df78eab33525d08d6e5fb8d27136e95/b/o/bookshelf1_2.jpg",
+			"http://furnishly.com/media/catalog/product/cache/1/small_image/55x55/9df78eab33525d08d6e5fb8d27136e95/1/6/169.JPG",
+			"http://furnishly.com/media/catalog/product/cache/1/small_image/55x55/9df78eab33525d08d6e5fb8d27136e95/c/h/chair1_10.jpeg",
+			"http://furnishly.com/media/catalog/product/cache/1/small_image/55x55/9df78eab33525d08d6e5fb8d27136e95/l/i/lia_endtable_3.jpg",
+			
+		};
+		
 		public int Count { get; set; }
 		
 		public IEnumerable<Product> GetProductsNear(CLLocationCoordinate2D location)
@@ -24,15 +33,22 @@ namespace Furnishly.UI
 								{
 									Title = "Product {0}".FormatWith(i),
 									Price = "${0}00".FormatWith(i),
+									IconImageUri = SelectRandomImage(),
 									Location = randomLocation
 								};
 			}
+		}
+		
+		private string SelectRandomImage()
+		{
+			var index = Locator.random.Next(0, images.Count);
+			return images[index];
 		}
 	}
 	
 	public class Locator
     {
-        static Random random = new Random();
+        public static Random random = new Random();
        
         public static CLLocationCoordinate2D GetLocationNear(CLLocationCoordinate2D location, double radius = 1.0)
         {

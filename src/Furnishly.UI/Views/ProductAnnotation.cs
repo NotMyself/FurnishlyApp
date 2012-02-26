@@ -20,9 +20,11 @@ namespace Furnishly.UI
 			set { product.Location = value;}
 		}
 		
-		public override string Title {
+		public override string Title 
+		{
 			get { return "{0} - {1}".FormatWith(product.Price, product.Title);}
 		}
+		
 		
 		public Product Product 
 		{

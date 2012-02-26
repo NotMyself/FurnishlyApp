@@ -76,15 +76,13 @@ namespace Furnishly.UI
 
         public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
         {
-        	var cell = tableView.DequeueReusableCell (cellId);
+        	var cell = tableView.DequeueReusableCell(cellId) as ProductTableViewCell;
         	if (cell == null)
             {
-        		cell = new UITableViewCell (UITableViewCellStyle.Subtitle, cellId);
+        		cell = new ProductTableViewCell(products[indexPath.Row], cellId);
         	}
-        	cell.TextLabel.LineBreakMode = UILineBreakMode.TailTruncation;
-        	cell.TextLabel.Text = products[indexPath.Row].Title;
-        	cell.DetailTextLabel.Text = products[indexPath.Row].Price;
-			cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+        	
+			cell.UpdateCell(products[indexPath.Row]);
             return cell;
         }
     }		
