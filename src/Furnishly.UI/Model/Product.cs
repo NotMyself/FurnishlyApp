@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 using MonoTouch.CoreLocation;
 
@@ -8,6 +11,7 @@ namespace Furnishly.UI
 	{
 		public Product()
 		{
+			Images = Enumerable.Empty<string>();
 		}
 		
 		public string Id { get; set; }
@@ -17,6 +21,7 @@ namespace Furnishly.UI
 		public string Price { get; set; }		
 		public string Url { get; set; }
 		public string IconImageUri { get; set; }
+		public IEnumerable<string> Images {get; set;}
 		public double Latitude { get; set; }
 		public double Longitude { get; set; }
 		public CLLocationCoordinate2D Location 
