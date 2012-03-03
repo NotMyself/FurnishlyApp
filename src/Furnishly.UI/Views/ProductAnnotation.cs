@@ -17,7 +17,7 @@ namespace Furnishly.UI
 		public override CLLocationCoordinate2D Coordinate 
 		{
 			get { return product.Location; }
-			set { product.Location = value;}
+			set { /*product.Location = value;*/}
 		}
 		
 		public override string Title 

@@ -22,7 +22,7 @@ namespace Furnishly.UI
 			Console.WriteLine("location: {0} {1}", locationManager.Location.Coordinate.Latitude, locationManager.Location.Coordinate.Longitude);
 			
 			return locationManager.Location.Coordinate;*/
-			return new MonoTouch.CoreLocation.CLLocationCoordinate2D(37.785834, -122.406417);
+			return new MonoTouch.CoreLocation.CLLocationCoordinate2D(41.8942,-87.6228);
 		}
 	}
 }
