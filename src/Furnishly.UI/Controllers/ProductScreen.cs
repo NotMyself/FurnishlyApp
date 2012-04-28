@@ -7,13 +7,14 @@ using MonoTouch.UIKit;
 
 namespace Furnishly.UI
 {
-	public class PageViewController: UIViewController
+	public class ProductScreen: UIViewController
 	{
 		Product product;
 
-		public PageViewController(Product product) : base()
+		public ProductScreen(Product product) : base()
 		{
 			this.product = product;
+			this.Title = product.Title;
 		}
 
 		public UIWebView webView;

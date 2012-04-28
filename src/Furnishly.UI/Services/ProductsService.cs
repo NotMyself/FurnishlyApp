@@ -21,6 +21,7 @@ namespace Furnishly.UI
 		public IEnumerable<Product> GetProductsNear(CLLocationCoordinate2D location)
 		{
 			var products = Enumerable.Empty<Product>();
+			Console.WriteLine("Fetching products near: {0} lat, {1} long", location.Latitude, location.Longitude);
 			var request = WebRequest.Create(CoordinatesUrl.FormatWith(location.Latitude, location.Longitude));
 			using (var response = request.GetResponse())
 			{

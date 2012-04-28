@@ -1,53 +1,66 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.MapKit;
+using MonoTouch.CoreLocation;
 
 namespace Furnishly.UI
 {
-	public partial class ProductScreen : UIViewController
+	public class ProductSearchController : UITabBarController
 	{
-		public ProductScreen () : base ("ProductScreen", null)
-		{
-		}
+		private LocationService locationService;
+		private ProductsService productsService;
 		
-		public Product Product {
-			get;
-			set;
-		}
-		
-		public override void DidReceiveMemoryWarning()
+		public ProductSearchController()
 		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
 		}
 		
 		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad ();
+			base.ViewDidLoad();
+			if(locationService == null)
+				locationService = new LocationService();
+		
+			if(productsService == null)
+				productsService = new ProductsService();
 			
-			// Perform any additional setup after loading the view, typically from a nib.
+			var productsListScreen = new ProductsListScreen
+									{
+										GetProducts = GetProducts	
+									};
+			var productsMapScreen = new ProductsMapScreen 
+									{ 
+										GetCurrentLocation = GetCurrentLocation,
+										GetProducts = GetProducts
+									};
+			
+			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
 		}
 		
-		public override void ViewDidUnload()
+//		public override void ViewWillAppear(bool animated)
+//		{
+//			base.ViewWillAppear(animated);
+//			this.NavigationController.SetNavigationBarHidden(true, animated);
+//		}
+//		
+//		public override void ViewWillDisappear(bool animated)
+//		{
+//			base.ViewWillDisappear(animated);
+//			this.NavigationController.SetNavigationBarHidden(false, animated);
+//		}
+		
+		private CLLocationCoordinate2D GetCurrentLocation()
 		{
-			base.ViewDidUnload ();
-			
-			// Clear any references to subviews of the main view in order to
-			// allow the Garbage Collector to collect them sooner.
-			//
-			// e.g. myOutlet.Dispose (); myOutlet = null;
-			
-			ReleaseDesignerOutlets ();
+			return locationService.GetCurrentLocation();
 		}
 		
-		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
+		private IEnumerable<Product> GetProducts()
 		{
-			// Return true for supported orientations
-			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+			var location = locationService.GetCurrentLocation();
+			return productsService.GetProductsNear(location);
 		}
 	}
 }

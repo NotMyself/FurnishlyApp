@@ -102,7 +102,7 @@ namespace Furnishly.UI
         {
 			var product = products[indexPath.Row];
 			
-			var productScreen = new PageViewController(product);
+			var productScreen = new ProductScreen(product);
 			controller.NavigationController.PushViewController(productScreen, true);	
 		}
     }

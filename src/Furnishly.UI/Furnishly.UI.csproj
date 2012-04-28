@@ -94,18 +94,14 @@
     </Compile>
     <Compile Include="Model\Product.cs" />
     <Compile Include="Utility\StringExtensions.cs" />
-    <Compile Include="Screens\ProductScreen.cs" />
-    <Compile Include="Screens\ProductScreen.designer.cs">
-      <DependentUpon>ProductScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\UIWebImageView.cs" />
     <Compile Include="Views\ProductTableViewCell.cs" />
     <Compile Include="Views\ProductAnnotation.cs" />
     <Compile Include="Views\UserAnnotation.cs" />
     <Compile Include="Controllers\AppViewController.cs" />
-    <Compile Include="Controllers\ProductSearchController.cs" />
     <Compile Include="Services\ProductsService.cs" />
-    <Compile Include="Controllers\PageViewController.cs" />
+    <Compile Include="Screens\ProductScreen.cs" />
+    <Compile Include="Controllers\ProductScreen.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -121,7 +117,6 @@
     <InterfaceDefinition Include="Screens\StartScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsMapScreen.xib" />
     <InterfaceDefinition Include="Screens\ProductsListScreen.xib" />
-    <InterfaceDefinition Include="Screens\ProductScreen.xib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\icon-114.png" />
