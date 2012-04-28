@@ -39,7 +39,7 @@ namespace Furnishly.UI
 			var annotation = e.View.Annotation as ProductAnnotation;
 			var product = annotation.Product;
 			
-			var productScreen = new ProductScreen { Product = product };
+			var productScreen = new PageViewController(product);
 				this.NavigationController.PushViewController(productScreen, true);
 		}
 		

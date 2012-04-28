@@ -105,6 +105,7 @@
     <Compile Include="Controllers\AppViewController.cs" />
     <Compile Include="Controllers\ProductSearchController.cs" />
     <Compile Include="Services\ProductsService.cs" />
+    <Compile Include="Controllers\PageViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
