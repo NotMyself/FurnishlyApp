@@ -35,21 +35,11 @@ namespace Furnishly.UI
 			};
 			webView.LoadFinished += delegate {
 				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-				//webView.EvaluateJavascript (script ());
 			};
             
             this.View.AddSubview(webView);
 
 			webView.LoadRequest(NSUrlRequest.FromUrl(new NSUrl(product.Url)));
-		}
-
-		private string script ()
-		{
-			return "var head = document.getElementsByTagName(\"head\")[0];"
-				 + "var element = document.createElement(\"meta\");"
-				 + "element.name = \"viewport\";"
-				 + "element.content = \"width=device-width; initial-scale=2.90; maximum-scale=2.90;\";"
-				 + "head.appendChild(element);";	
 		}
 	}
 }
