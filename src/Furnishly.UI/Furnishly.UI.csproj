@@ -101,7 +101,7 @@
     <Compile Include="Controllers\AppViewController.cs" />
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Screens\ProductScreen.cs" />
-    <Compile Include="Controllers\ProductScreen.cs" />
+    <Compile Include="Controllers\ProductSearchController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

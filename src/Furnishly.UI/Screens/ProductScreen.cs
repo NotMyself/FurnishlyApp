@@ -1,66 +1,46 @@
 using System;
-using System.Drawing;
 using System.Collections.Generic;
-
+using System.Drawing;
+using System.Text;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using MonoTouch.MapKit;
-using MonoTouch.CoreLocation;
 
 namespace Furnishly.UI
 {
-	public class ProductSearchController : UITabBarController
+	public class ProductScreen: UIViewController
 	{
-		private LocationService locationService;
-		private ProductsService productsService;
-		
-		public ProductSearchController()
+		Product product;
+
+		public ProductScreen(Product product) : base()
 		{
+			this.product = product;
+			this.Title = product.Title;
 		}
-		
-		public override void ViewDidLoad()
+
+		public UIWebView webView;
+
+		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad();
-			if(locationService == null)
-				locationService = new LocationService();
-		
-			if(productsService == null)
-				productsService = new ProductsService();
-			
-			var productsListScreen = new ProductsListScreen
-									{
-										GetProducts = GetProducts	
-									};
-			var productsMapScreen = new ProductsMapScreen 
-									{ 
-										GetCurrentLocation = GetCurrentLocation,
-										GetProducts = GetProducts
-									};
-			
-			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
-		}
-		
-//		public override void ViewWillAppear(bool animated)
-//		{
-//			base.ViewWillAppear(animated);
-//			this.NavigationController.SetNavigationBarHidden(true, animated);
-//		}
-//		
-//		public override void ViewWillDisappear(bool animated)
-//		{
-//			base.ViewWillDisappear(animated);
-//			this.NavigationController.SetNavigationBarHidden(false, animated);
-//		}
-		
-		private CLLocationCoordinate2D GetCurrentLocation()
-		{
-			return locationService.GetCurrentLocation();
-		}
-		
-		private IEnumerable<Product> GetProducts()
-		{
-			var location = locationService.GetCurrentLocation();
-			return productsService.GetProductsNear(location);
+
+			var webFrame = new RectangleF (0, 0, this.View.Frame.Width, this.View.Frame.Height - 44);
+
+			webView = new UIWebView (webFrame) {
+				BackgroundColor = UIColor.White,
+				ScalesPageToFit = true,
+				AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+			};
+
+			webView.LoadStarted += delegate {
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+			};
+			webView.LoadFinished += delegate {
+				UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+			};
+            
+            this.View.AddSubview(webView);
+
+			webView.LoadRequest(NSUrlRequest.FromUrl(new NSUrl(product.Url)));
 		}
 	}
 }
