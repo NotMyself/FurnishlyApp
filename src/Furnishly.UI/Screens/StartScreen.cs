@@ -3,6 +3,10 @@ using System.Drawing;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Xamarin.Geolocation;
 
 namespace Furnishly.UI
 {
@@ -20,9 +24,18 @@ namespace Furnishly.UI
 	 * */
 	public partial class StartScreen : UIViewController
 	{
+		private Geolocator geolocator;
+		private TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+		private CancellationTokenSource cancelSource;
+		
 		public StartScreen() : base("StartScreen", null)
 		{
-			
+			this.geolocator = new Geolocator() { DesiredAccuracy = 50 };
+		}
+		
+		public StartScreen(Geolocator geolocator) : base("StartScreen", null)
+		{
+			this.geolocator = geolocator;
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -36,16 +49,19 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			//this.btnLocate.Alpha = 0;
-			//this.activityIndicator.Alpha = 0;
-			this.messages.Alpha = 0;
-			
 			this.activityIndicator.StartAnimating();
-			
-			this.btnLocate.TouchUpInside += (sender, e) => {
-				var productSearchController = new ProductSearchController();
-				this.NavigationController.PushViewController(productSearchController, true);
-			};
+			if(checkIfGeolocationIsEnabled())
+			{
+				if(checkIfNetworkIsAvailable()) 
+				{
+					startCurrentLocation();
+					
+					this.btnLocate.TouchUpInside += (sender, e) => {
+						var productSearchController = new ProductSearchController();
+						this.NavigationController.PushViewController(productSearchController, true);
+					};
+				}
+			}
 		}
 		
 		public override void ViewDidUnload()
@@ -76,6 +92,43 @@ namespace Furnishly.UI
 		{
 			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+		}
+		
+		private bool checkIfGeolocationIsEnabled()
+		{
+			this.messages.Text = "Checking for geolocation services...";
+			if(!this.geolocator.IsGeolocationEnabled)
+			{
+				this.messages.Text = "Geolocation services are disabled.";
+				return false;
+			}
+			
+			return true;
+		}
+		
+		private bool checkIfNetworkIsAvailable()
+		{
+			this.messages.Text = "Checking for network access...";
+			return true;
+		}
+		
+		private void startCurrentLocation()
+		{
+			this.cancelSource = new CancellationTokenSource();
+			
+			this.geolocator.GetPositionAsync(timeout: 10000, cancelToken: this.cancelSource.Token)
+				.ContinueWith (t =>
+				{
+					if (t.IsFaulted)
+						this.messages.Text = ((GeolocationException)t.Exception.InnerException).Error.ToString();
+					else if (t.IsCanceled)
+						this.messages.Text = "Canceled";
+					else
+					{
+						this.messages.Text = t.Result.Timestamp.ToString("G");
+					}
+					
+				}, scheduler);
 		}
 	}
 }
