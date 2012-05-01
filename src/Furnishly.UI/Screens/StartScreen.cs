@@ -6,6 +6,18 @@ using MonoTouch.UIKit;
 
 namespace Furnishly.UI
 {
+	/* StartScreen Specs
+	 * when the application launches
+	 * 		the start screen 
+	 * 			should check if geolocation services are enabled
+	 * 				if they are not, display a message and end
+	 * 			should check if there is a network connection available
+	 * 				if no network, display a message and end
+	 * 			should fetch the users current location
+	 * 				when current location recieved store and enable button
+	 * 				if error display message and end
+	 * 
+	 * */
 	public partial class StartScreen : UIViewController
 	{
 		public StartScreen() : base("StartScreen", null)

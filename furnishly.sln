@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{504E0892-33E5-40D2-912C-45531EA9BA67}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookComputing.XmlRpc", "lib\CookComputing.XmlRpc\CookComputing.XmlRpc.csproj", "{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ez.Newsletter.MagentoApi", "lib\Ez.Newsletter.MagentoApi\Ez.Newsletter.MagentoApi.csproj", "{C793220D-4450-470E-8707-A5C14A2C16B0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furnishly.UI", "src\Furnishly.UI\Furnishly.UI.csproj", "{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furnishly.UnitTests", "src\Furnishly.UnitTests\Furnishly.UnitTests.csproj", "{2C2653D3-5F37-4079-B4AC-49B604393D52}"
@@ -45,14 +39,6 @@ Global
 		{2C2653D3-5F37-4079-B4AC-49B604393D52}.Release|iPhone.Build.0 = Release|iPhone
 		{2C2653D3-5F37-4079-B4AC-49B604393D52}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{2C2653D3-5F37-4079-B4AC-49B604393D52}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C793220D-4450-470E-8707-A5C14A2C16B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C793220D-4450-470E-8707-A5C14A2C16B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C793220D-4450-470E-8707-A5C14A2C16B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C793220D-4450-470E-8707-A5C14A2C16B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.AdHoc|iPhone.ActiveCfg = Debug|iPhone
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.AdHoc|iPhone.Build.0 = Debug|iPhone
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.AdHoc|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
@@ -73,10 +59,6 @@ Global
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.Release|iPhone.Build.0 = Release|iPhone
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{E4F818B8-1FB0-45D7-88E1-BDCF347C3026}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3748F67B-6DCD-4B1F-97F6-DB64D791C8D2} = {504E0892-33E5-40D2-912C-45531EA9BA67}
-		{C793220D-4450-470E-8707-A5C14A2C16B0} = {504E0892-33E5-40D2-912C-45531EA9BA67}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = src\Furnishly.UI\Furnishly.UI.csproj
