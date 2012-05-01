@@ -6,6 +6,8 @@ using MonoTouch.UIKit;
 using System.Threading;
 using System.Threading.Tasks;
 
+using MonoTouch.SystemConfiguration;
+
 using Xamarin.Geolocation;
 
 namespace Furnishly.UI
@@ -25,12 +27,14 @@ namespace Furnishly.UI
 	public partial class StartScreen : UIViewController
 	{
 		private Geolocator geolocator;
+		private NetworkReachability networkReachability;
 		private TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
 		private CancellationTokenSource cancelSource;
 		
 		public StartScreen() : base("StartScreen", null)
 		{
 			this.geolocator = new Geolocator() { DesiredAccuracy = 50 };
+			this.networkReachability = new NetworkReachability("http://google.com");
 		}
 		
 		public StartScreen(Geolocator geolocator) : base("StartScreen", null)
@@ -109,11 +113,18 @@ namespace Furnishly.UI
 		private bool checkIfNetworkIsAvailable()
 		{
 			this.messages.Text = "Checking for network access...";
+			NetworkReachabilityFlags flags;
+			if(!networkReachability.TryGetFlags(out flags))
+			{
+				this.messages.Text = "No network connection found.";
+				return false;
+			}
 			return true;
 		}
 		
 		private void startCurrentLocation()
 		{
+			this.messages.Text = "Getting current location...";
 			this.cancelSource = new CancellationTokenSource();
 			
 			this.geolocator.GetPositionAsync(timeout: 10000, cancelToken: this.cancelSource.Token)
@@ -125,7 +136,9 @@ namespace Furnishly.UI
 						this.messages.Text = "Canceled";
 					else
 					{
-						this.messages.Text = t.Result.Timestamp.ToString("G");
+						this.messages.Alpha = 0;
+						this.activityIndicator.Alpha = 0;
+						this.btnLocate.Alpha = 1;
 					}
 					
 				}, scheduler);
