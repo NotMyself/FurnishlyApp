@@ -16,6 +16,8 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>5.0</string>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -33,7 +35,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
 </dict>
 </plist>
