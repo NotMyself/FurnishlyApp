@@ -7,12 +7,14 @@ using MonoTouch.UIKit;
 using MonoTouch.MapKit;
 using MonoTouch.CoreLocation;
 
+using Xamarin.Geolocation;
+
 namespace Furnishly.UI
 {
 	
 	public partial class ProductsMapScreen : UIViewController
 	{
-		public Func<CLLocationCoordinate2D> GetCurrentLocation;
+		public Func<Position> GetCurrentLocation;
 		public Func<IEnumerable<Product>> GetProducts;
 		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
@@ -50,8 +52,9 @@ namespace Furnishly.UI
 		
 		private void AnnotateUsersCurrentLocation()
 		{
-			var location = GetCurrentLocation();
-			this.mapView.AddAnnotation(new UserAnnotation(location));
+			Position location = GetCurrentLocation();
+			var coordinate = new CLLocationCoordinate2D(location.Latitude, location.Longitude);
+			this.mapView.AddAnnotation(new UserAnnotation(coordinate));
 		}
 		
 		private void AnnotateProductsNearBy()
@@ -70,9 +73,10 @@ namespace Furnishly.UI
 		
 		private MKCoordinateRegion GetVisibleRegion()
 		{
-			var currentLocation = GetCurrentLocation();
+			Position location = GetCurrentLocation();
+			var coordinate = new CLLocationCoordinate2D(location.Latitude, location.Longitude);
 			var span = new MKCoordinateSpan(0.02,0.02);
-			var region = new MKCoordinateRegion(currentLocation,span);
+			var region = new MKCoordinateRegion(coordinate,span);
 			
 			return region;
 		}

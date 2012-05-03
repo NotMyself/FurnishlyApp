@@ -124,6 +124,8 @@
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Screens\ProductScreen.cs" />
     <Compile Include="Controllers\ProductSearchController.cs" />
+    <Compile Include="Utility\Reachability.cs" />
+    <Compile Include="Utility\Activity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

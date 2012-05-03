@@ -7,23 +7,23 @@ using MonoTouch.UIKit;
 using MonoTouch.MapKit;
 using MonoTouch.CoreLocation;
 
+using Xamarin.Geolocation;
+
 namespace Furnishly.UI
 {
 	public class ProductSearchController : UITabBarController
 	{
-		private LocationService locationService;
 		private ProductsService productsService;
 		
 		public ProductSearchController()
 		{
 		}
 		
+		public Position SearchPosition {get; set;}
+		
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			if(locationService == null)
-				locationService = new LocationService();
-		
 			if(productsService == null)
 				productsService = new ProductsService();
 			
@@ -33,7 +33,7 @@ namespace Furnishly.UI
 									};
 			var productsMapScreen = new ProductsMapScreen 
 									{ 
-										GetCurrentLocation = GetCurrentLocation,
+										GetCurrentLocation = () => { return SearchPosition; },
 										GetProducts = GetProducts
 									};
 			
@@ -51,16 +51,13 @@ namespace Furnishly.UI
 //			base.ViewWillDisappear(animated);
 //			this.NavigationController.SetNavigationBarHidden(false, animated);
 //		}
-		
-		private CLLocationCoordinate2D GetCurrentLocation()
-		{
-			return locationService.GetCurrentLocation();
-		}
-		
+				
 		private IEnumerable<Product> GetProducts()
 		{
-			var location = locationService.GetCurrentLocation();
-			return productsService.GetProductsNear(location);
+			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+			if(SearchPosition == null)
+				return productsService.GetProductsNear(chicago);
+			return productsService.GetProductsNear(SearchPosition);
 		}
 	}
 }

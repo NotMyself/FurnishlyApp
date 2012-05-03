@@ -3,6 +3,8 @@ using System;
 using MonoTouch.MapKit;
 using MonoTouch.CoreLocation;
 
+using Xamarin.Geolocation;
+
 namespace Furnishly.UI
 {
 	public class UserAnnotation: MKAnnotation

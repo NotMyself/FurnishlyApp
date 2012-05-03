@@ -1,11 +1,10 @@
 using System;
 using System.Drawing;
-
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 using System.Threading;
 using System.Threading.Tasks;
 
+using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 using MonoTouch.SystemConfiguration;
 
 using Xamarin.Geolocation;
@@ -27,19 +26,14 @@ namespace Furnishly.UI
 	public partial class StartScreen : UIViewController
 	{
 		private Geolocator geolocator;
-		private NetworkReachability networkReachability;
-		private TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-		private CancellationTokenSource cancelSource;
+		private TaskScheduler scheduler;
+		private ProductSearchController productSearchController;
 		
 		public StartScreen() : base("StartScreen", null)
 		{
-			this.geolocator = new Geolocator() { DesiredAccuracy = 50 };
-			this.networkReachability = new NetworkReachability("http://google.com");
-		}
-		
-		public StartScreen(Geolocator geolocator) : base("StartScreen", null)
-		{
-			this.geolocator = geolocator;
+			this.geolocator = new Geolocator { DesiredAccuracy = 50 };
+			this.scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+			this.productSearchController = new ProductSearchController();
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -53,7 +47,7 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			this.activityIndicator.StartAnimating();
+			Activity.PushNetworkActive();
 			if(checkIfGeolocationIsEnabled())
 			{
 				if(checkIfNetworkIsAvailable()) 
@@ -61,7 +55,6 @@ namespace Furnishly.UI
 					startCurrentLocation();
 					
 					this.btnLocate.TouchUpInside += (sender, e) => {
-						var productSearchController = new ProductSearchController();
 						this.NavigationController.PushViewController(productSearchController, true);
 					};
 				}
@@ -70,14 +63,14 @@ namespace Furnishly.UI
 		
 		public override void ViewDidUnload()
 		{
-			base.ViewDidUnload ();
+			base.ViewDidUnload();
 			
 			// Clear any references to subviews of the main view in order to
 			// allow the Garbage Collector to collect them sooner.
 			//
 			// e.g. myOutlet.Dispose (); myOutlet = null;
 			
-			ReleaseDesignerOutlets ();
+			ReleaseDesignerOutlets();
 		}
 		
 		public override void ViewWillAppear(bool animated)
@@ -113,8 +106,7 @@ namespace Furnishly.UI
 		private bool checkIfNetworkIsAvailable()
 		{
 			this.messages.Text = "Checking for network access...";
-			NetworkReachabilityFlags flags;
-			if(!networkReachability.TryGetFlags(out flags))
+			if(Reachability.RemoteHostStatus() == NetworkStatus.NotReachable)
 			{
 				this.messages.Text = "No network connection found.";
 				return false;
@@ -125,22 +117,20 @@ namespace Furnishly.UI
 		private void startCurrentLocation()
 		{
 			this.messages.Text = "Getting current location...";
-			this.cancelSource = new CancellationTokenSource();
 			
-			this.geolocator.GetPositionAsync(timeout: 10000, cancelToken: this.cancelSource.Token)
-				.ContinueWith (t =>
+			this.geolocator.GetPositionAsync(timeout: 10000)
+				.ContinueWith(t =>
 				{
 					if (t.IsFaulted)
 						this.messages.Text = ((GeolocationException)t.Exception.InnerException).Error.ToString();
-					else if (t.IsCanceled)
-						this.messages.Text = "Canceled";
 					else
 					{
+						
 						this.messages.Alpha = 0;
 						this.activityIndicator.Alpha = 0;
 						this.btnLocate.Alpha = 1;
 					}
-					
+					Activity.PopNetworkActive();
 				}, scheduler);
 		}
 	}
