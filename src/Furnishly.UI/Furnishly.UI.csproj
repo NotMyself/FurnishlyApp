@@ -101,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Screens\StartScreen.designer.cs">
