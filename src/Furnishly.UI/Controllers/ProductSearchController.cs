@@ -14,6 +14,8 @@ namespace Furnishly.UI
 	public class ProductSearchController : UITabBarController
 	{
 		private ProductsService productsService;
+		private ProductsListScreen productsListScreen;
+		private ProductsMapScreen productsMapScreen;
 		
 		public ProductSearchController()
 		{
@@ -24,33 +26,25 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			if(productsService == null)
-				productsService = new ProductsService();
 			
-			var productsListScreen = new ProductsListScreen
-									{
-										GetProducts = GetProducts	
-									};
-			var productsMapScreen = new ProductsMapScreen 
-									{ 
-										GetCurrentLocation = () => { return SearchPosition; },
-										GetProducts = GetProducts
-									};
-			
+			productsService = new ProductsService();
+			var products = GetProducts();
+			productsListScreen = new ProductsListScreen(products);
+			productsMapScreen = new ProductsMapScreen();
+
 			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
+			
+			productsMapScreen.ShowProducts(products, GetPosition());			
 		}
-		
-//		public override void ViewWillAppear(bool animated)
-//		{
-//			base.ViewWillAppear(animated);
-//			this.NavigationController.SetNavigationBarHidden(true, animated);
-//		}
-//		
-//		public override void ViewWillDisappear(bool animated)
-//		{
-//			base.ViewWillDisappear(animated);
-//			this.NavigationController.SetNavigationBarHidden(false, animated);
-//		}
+			                               
+		private Position GetPosition()
+		{
+			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+			if(SearchPosition == null)
+				return chicago;
+				
+			return SearchPosition;
+		}
 				
 		private IEnumerable<Product> GetProducts()
 		{

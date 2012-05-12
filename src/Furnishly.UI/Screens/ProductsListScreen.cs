@@ -11,10 +11,10 @@ namespace Furnishly.UI
 {
 	public partial class ProductsListScreen : UIViewController
 	{
-		public Func<IEnumerable<Product>> GetProducts;
-		
-		public ProductsListScreen() : base("ProductsListScreen", null)
+		IEnumerable<Product> products;
+		public ProductsListScreen(IEnumerable<Product> products) : base("ProductsListScreen", null)
 		{
+			this.products = products;
 			TabBarItem = new UITabBarItem 
 			{ 
 				Title = "List", 
@@ -33,10 +33,9 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			var products = GetProducts().ToList();
 					
-			this.productsList.DataSource = new ProductTableViewDataSource(products);
-			this.productsList.Delegate = new ProductTableViewDelegate(this, products);
+			this.productsList.DataSource = new ProductTableViewDataSource (products.ToList());
+			this.productsList.Delegate = new ProductTableViewDelegate (this, products.ToList());
 			
 		}
 		
@@ -62,7 +61,7 @@ namespace Furnishly.UI
 	public class ProductTableViewDataSource : UITableViewDataSource
     {
 		private string cellId = "cellid";
-		private IList<Product> products;
+		public IList<Product> products;
 
 		public ProductTableViewDataSource(IList<Product> products)
         {

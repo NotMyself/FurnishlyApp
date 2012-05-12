@@ -14,9 +14,6 @@ namespace Furnishly.UI
 	
 	public partial class ProductsMapScreen : UIViewController
 	{
-		public Func<Position> GetCurrentLocation;
-		public Func<IEnumerable<Product>> GetProducts;
-		
 		public ProductsMapScreen() : base("ProductsMapScreen", null)
 		{
 			TabBarItem = new UITabBarItem 
@@ -31,9 +28,36 @@ namespace Furnishly.UI
 			base.ViewDidLoad();
 			this.mapView.GetViewForAnnotation += GetViewForAnnotation;
 			this.mapView.CalloutAccessoryControlTapped += ViewSelectedProduct;
-			SetVisibleRegion();
-			AnnotateUsersCurrentLocation();
-			AnnotateProductsNearBy();
+		}
+		
+		public void ShowProducts(IEnumerable<Product> products, Position position) 
+		{
+			SetVisibleRegion(position);
+			AnnotateUsersCurrentLocation(position);
+			AnnotateProductsNearBy(products);
+
+		}
+		
+		private void SetVisibleRegion(Position position)
+		{
+			var coordinate = new CLLocationCoordinate2D(position.Latitude, position.Longitude);
+			var span = new MKCoordinateSpan(0.02,0.02);
+			var region = new MKCoordinateRegion(coordinate,span);
+			
+			this.mapView.SetRegion(region, true);
+		}
+		
+		private void AnnotateUsersCurrentLocation(Position position)
+		{
+			var coordinate = new CLLocationCoordinate2D(position.Latitude, position.Longitude);
+			this.mapView.AddAnnotation(new UserAnnotation(coordinate));
+		}
+		
+		private void AnnotateProductsNearBy(IEnumerable<Product> products)
+		{
+			foreach (var product in products) 
+				this.mapView.AddAnnotation(new ProductAnnotation(product));	
+			
 		}
 
 		void ViewSelectedProduct(object sender, MKMapViewAccessoryTappedEventArgs e)
@@ -48,37 +72,6 @@ namespace Furnishly.UI
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 		{
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
-		}
-		
-		private void AnnotateUsersCurrentLocation()
-		{
-			Position location = GetCurrentLocation();
-			var coordinate = new CLLocationCoordinate2D(location.Latitude, location.Longitude);
-			this.mapView.AddAnnotation(new UserAnnotation(coordinate));
-		}
-		
-		private void AnnotateProductsNearBy()
-		{
-			var products = GetProducts();
-			
-			foreach (var product in products) 
-				this.mapView.AddAnnotation(new ProductAnnotation(product));	
-			
-		}
-		
-		private void SetVisibleRegion()
-		{
-			this.mapView.SetRegion(GetVisibleRegion(), true);
-		}	
-		
-		private MKCoordinateRegion GetVisibleRegion()
-		{
-			Position location = GetCurrentLocation();
-			var coordinate = new CLLocationCoordinate2D(location.Latitude, location.Longitude);
-			var span = new MKCoordinateSpan(0.02,0.02);
-			var region = new MKCoordinateRegion(coordinate,span);
-			
-			return region;
 		}
 		
 		private MKAnnotationView GetViewForAnnotation(MKMapView mapView, NSObject annotation)

@@ -83,12 +83,6 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="MonoTouch.Dialog-1" />
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\lib\ServiceStack.Text\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\lib\ServiceStack.Text\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\lib\ServiceStack.Text\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -101,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Screens\StartScreen.designer.cs">
       <DependentUpon>StartScreen.cs</DependentUpon>
@@ -120,7 +113,6 @@
     <Compile Include="Views\ProductTableViewCell.cs" />
     <Compile Include="Views\ProductAnnotation.cs" />
     <Compile Include="Views\UserAnnotation.cs" />
-    <Compile Include="Controllers\AppViewController.cs" />
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Screens\ProductScreen.cs" />
     <Compile Include="Controllers\ProductSearchController.cs" />

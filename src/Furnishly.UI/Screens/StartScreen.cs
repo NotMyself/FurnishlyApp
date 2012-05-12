@@ -33,7 +33,6 @@ namespace Furnishly.UI
 		{
 			this.geolocator = new Geolocator { DesiredAccuracy = 50 };
 			this.scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-			this.productSearchController = new ProductSearchController();
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -48,13 +47,14 @@ namespace Furnishly.UI
 		{
 			base.ViewDidLoad();
 			Activity.PushNetworkActive();
-			if(checkIfGeolocationIsEnabled())
+			if(GeolocationIsEnabled())
 			{
-				if(checkIfNetworkIsAvailable()) 
+				if(NetworkIsAvailable()) 
 				{
 					startCurrentLocation();
 					
 					this.btnLocate.TouchUpInside += (sender, e) => {
+						this.productSearchController = new ProductSearchController();
 						this.NavigationController.PushViewController(productSearchController, true);
 					};
 				}
@@ -91,7 +91,7 @@ namespace Furnishly.UI
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
 		}
 		
-		private bool checkIfGeolocationIsEnabled()
+		private bool GeolocationIsEnabled()
 		{
 			this.messages.Text = "Checking for geolocation services...";
 			if(!this.geolocator.IsGeolocationEnabled)
@@ -103,7 +103,7 @@ namespace Furnishly.UI
 			return true;
 		}
 		
-		private bool checkIfNetworkIsAvailable()
+		private bool NetworkIsAvailable()
 		{
 			this.messages.Text = "Checking for network access...";
 			if(Reachability.RemoteHostStatus() == NetworkStatus.NotReachable)
