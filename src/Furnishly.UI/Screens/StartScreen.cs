@@ -57,7 +57,7 @@ namespace Furnishly.UI
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 		{
 			// Return true for supported orientations
-			return false;
+			return (toInterfaceOrientation == UIInterfaceOrientation.Portrait);
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -118,9 +118,10 @@ namespace Furnishly.UI
 			else
 			{
 				this.activityIndicator.StopAnimating();
+				var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
 				this.messages.Alpha = 0;
 				this.btnLocate.Alpha = 1;
-				currentPosition = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+				currentPosition = chicago;//positionTask.Result;
 			}
 			Activity.PopNetworkActive();
 
@@ -162,11 +163,9 @@ namespace Furnishly.UI
 			this.activityIndicator.StopAnimating();
 		}
 		
-		private IEnumerable<Product> GetProducts(Position postion)
+		private IEnumerable<Product> GetProducts(Position position)
 		{
-			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
-				return productsService.GetProductsNear(chicago);
-			//return productsService.GetProductsNear(SearchPosition);
+			return productsService.GetProductsNear(position);
 		}
 		
 		private void BeginGetProducts()

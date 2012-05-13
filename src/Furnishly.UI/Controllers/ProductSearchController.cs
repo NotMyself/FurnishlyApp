@@ -42,7 +42,7 @@ namespace Furnishly.UI
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 		{
 			// Return true for supported orientations
-			return false;
+			return (toInterfaceOrientation == UIInterfaceOrientation.Portrait);
 		}
 			                               
 	}
