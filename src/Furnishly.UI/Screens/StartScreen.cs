@@ -57,7 +57,7 @@ namespace Furnishly.UI
 		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
 		{
 			// Return true for supported orientations
-			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+			return false;
 		}
 		
 		public override void DidReceiveMemoryWarning()
@@ -199,6 +199,8 @@ namespace Furnishly.UI
 					ShowProducts();
 				});
 			}
+			this.activityIndicator.StopAnimating();
+			this.messages.Alpha = 0;
 			Activity.PopNetworkActive();
 		}
 	}

@@ -38,6 +38,12 @@ namespace Furnishly.UI
 
 			base.ViewWillAppear (animated);
 		}
+		
+		public override bool ShouldAutorotateToInterfaceOrientation(UIInterfaceOrientation toInterfaceOrientation)
+		{
+			// Return true for supported orientations
+			return false;
+		}
 			                               
 	}
 }
