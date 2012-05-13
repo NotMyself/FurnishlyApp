@@ -47,7 +47,7 @@ namespace Furnishly.UI
 		private void SetVisibleRegion()
 		{
 			var coordinate = new CLLocationCoordinate2D(position.Latitude, position.Longitude);
-			var span = new MKCoordinateSpan(0.02,0.02);
+			var span = new MKCoordinateSpan(0.1,0.1);
 			var region = new MKCoordinateRegion(coordinate,span);
 			
 			this.mapView.SetRegion(region, true);

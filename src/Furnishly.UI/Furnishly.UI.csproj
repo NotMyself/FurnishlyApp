@@ -44,11 +44,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Robert JOHNSON (RRFDTNKHF3)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchProfiling>true</MtouchProfiling>
     <IpaPackageName />
-    <CodesignProvision>644CFCEE-B868-4D94-BEEA-B80DFFB157E6</CodesignProvision>
+    <CodesignProvision>431E78BA-ED12-445C-82EA-A1A950FE6444</CodesignProvision>
     <MtouchArch>ARMv7</MtouchArch>
     <BuildIpa>true</BuildIpa>
     <IpaMetadata>Info.plist</IpaMetadata>
@@ -61,15 +61,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Robert JOHNSON (RRFDTNKHF3)</CodesignKey>
     <IpaPackageName />
+    <MtouchArch>ARMv7</MtouchArch>
+    <CodesignProvision>431E78BA-ED12-445C-82EA-A1A950FE6444</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\AppStore</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution: Robert JOHNSON</CodesignKey>
+    <MtouchArch>ARMv7</MtouchArch>
+    <MtouchI18n />
+    <CodesignProvision>A328E087-D8D6-402E-88A1-F35D4E74C619</CodesignProvision>
+    <IpaPackageName />
+    <CrashReportingApiKey />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -141,7 +148,6 @@
     <Content Include="Images\icon-50.png" />
     <Content Include="Images\icon-57.png" />
     <Content Include="Images\icon-58.png" />
-    <Content Include="Images\icon-512.png" />
     <Content Include="Images\launch-960.png" />
     <Content Include="Default%402x.png" />
     <Content Include="Images\launch-480.png" />
@@ -154,5 +160,8 @@
     <Content Include="Images\icon-57-white.png" />
     <Content Include="Images\icon-58-white.png" />
     <Content Include="Images\icon-72-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="Images\icon-512.png" />
   </ItemGroup>
 </Project>

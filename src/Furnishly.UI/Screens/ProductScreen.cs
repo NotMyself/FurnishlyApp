@@ -39,8 +39,8 @@ namespace Furnishly.UI
 			};
             
             this.View.AddSubview(webView);
-
-			webView.LoadRequest(NSUrlRequest.FromUrl(new NSUrl(product.Url)));
+			if(!string.IsNullOrWhiteSpace(product.Url))
+				webView.LoadRequest(NSUrlRequest.FromUrl(new NSUrl(product.Url)));
 		}
 	}
 }

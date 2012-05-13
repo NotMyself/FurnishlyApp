@@ -29,7 +29,7 @@ namespace Furnishly.UI
 				products = JsonSerializer.DeserializeFromStream<Product[]>(response.GetResponseStream());
 			}
 			
-			return products;
+			return products.Where(x => !string.IsNullOrWhiteSpace(x.Url));
 		}
 	}
 }

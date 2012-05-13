@@ -37,7 +37,8 @@ namespace Furnishly.UI
         	this.TextLabel.Text = this.product.Title;
         	this.DetailTextLabel.Text = this.product.Price;
 			this.ImageView.Image = UIImage.FromFile("Images/icon-29.png");
-			DownloadImage(product.IconImageUri);
+			if(!string.IsNullOrWhiteSpace(product.IconImageUri))
+				DownloadImage(product.IconImageUri);
 		}
 		
 		public void DownloadImage(string url){

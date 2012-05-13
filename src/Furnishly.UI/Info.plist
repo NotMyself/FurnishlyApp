@@ -12,10 +12,13 @@
 		<string>Images/icon-29.png</string>
 		<string>Images/icon-58.png</string>
 		<string>Images/icon-50.png</string>
-		<string>Images/icon-512.png</string>
 	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.furnishly.furnishlyapp</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
 	<key>MinimumOSVersion</key>
-	<string>5.1</string>
+	<string>5.0</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UIDeviceFamily</key>
