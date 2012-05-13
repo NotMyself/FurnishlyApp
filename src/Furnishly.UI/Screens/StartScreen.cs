@@ -36,7 +36,6 @@ namespace Furnishly.UI
 		
 		public StartScreen() : base("StartScreen", null)
 		{
-			Console.WriteLine(TaskScheduler.FromCurrentSynchronizationContext ().GetType ().ToString ());
 			this.geolocator = new Geolocator { DesiredAccuracy = 50 };
 			this.productsService = new ProductsService();
 		}
