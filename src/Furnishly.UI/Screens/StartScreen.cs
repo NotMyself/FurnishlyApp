@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using MonoTouch.SystemConfiguration;
+using MonoTouch.CoreLocation;
 
 using Xamarin.Geolocation;
 
@@ -69,11 +70,12 @@ namespace Furnishly.UI
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+			this.activityIndicator.HidesWhenStopped = true;
 			this.activityIndicator.StartAnimating();
-			startCurrentLocation();
+			BeginGetCurrentLocation();
 			
 			this.btnLocate.TouchUpInside += (sender, e) => {
-				startGetProducts();
+				BeginGetProducts();
 			};
 		}
 		
@@ -96,16 +98,25 @@ namespace Furnishly.UI
 			this.productSearchController = new ProductSearchController(thisPosition, thisProducts);
 			this.NavigationController.PushViewController(productSearchController, true);	
 		}
+		
+		private void HandleException(Exception exception)
+		{
+			if(exception.InnerException.GetType() == typeof(GeolocationException))
+				ShowLocationServicesAlert();
+//			this.messages.Text = ((GeolocationException)exception.InnerException).Error.ToString();
+		}
 				
 		private void OnCurrentLocation(Task<Position> positionTask)
 		{
 		
 			if (positionTask.IsFaulted)
-				this.messages.Text = ((GeolocationException)positionTask.Exception.InnerException).Error.ToString();
+			{
+				HandleException(positionTask.Exception);
+			}
 			else
 			{
-				//this.messages.Alpha = 0;
-				//this.activityIndicator.Alpha = 0;
+				this.activityIndicator.StopAnimating();
+				this.messages.Alpha = 0;
 				this.btnLocate.Alpha = 1;
 				currentPosition = new Position { Latitude = 41.8942, Longitude =  -87.6228};
 					//positionTask.Result;
@@ -114,16 +125,31 @@ namespace Furnishly.UI
 
 		}
 		
-		private void startCurrentLocation()
+		private void BeginGetCurrentLocation()
 		{
 			Activity.PushNetworkActive();
-			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-			this.messages.Text = "Getting current location...";
-			this.geolocator.GetPositionAsync(timeout: 10000)
-				.ContinueWith(OnCurrentLocation, scheduler);
+			if(CLLocationManager.LocationServicesEnabled)
+			{
+				var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+				this.messages.Text = "Getting current location...";
+				this.geolocator.GetPositionAsync(timeout: 10000)
+					.ContinueWith(OnCurrentLocation, scheduler);
+			} 
+			else
+			{
+				ShowLocationServicesAlert();
+			}
 		}
 			
-		
+		private void ShowLocationServicesAlert()
+		{
+			using(var alert = new UIAlertView("Oops", "Location Service must be enabled", null, "OK", null))
+			{
+			    alert.Show();
+			}
+			this.messages.Text = "Please enable Location Services to continue.";
+			this.activityIndicator.StopAnimating();
+		}
 		
 		private IEnumerable<Product> GetProducts(Position postion)
 		{
@@ -132,7 +158,7 @@ namespace Furnishly.UI
 			//return productsService.GetProductsNear(SearchPosition);
 		}
 		
-		private void startGetProducts()
+		private void BeginGetProducts()
 		{
 			Activity.PushNetworkActive();
 			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
