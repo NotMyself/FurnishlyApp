@@ -11,10 +11,11 @@ namespace Furnishly.UI
 {
 	public partial class ProductsListScreen : UIViewController
 	{
-		IEnumerable<Product> products;
+		IList<Product> products;
+		
 		public ProductsListScreen(IEnumerable<Product> products) : base("ProductsListScreen", null)
 		{
-			this.products = products;
+			this.products = products.ToList();
 			TabBarItem = new UITabBarItem 
 			{ 
 				Title = "List", 
@@ -31,12 +32,16 @@ namespace Furnishly.UI
 		}
 		
 		public override void ViewDidLoad()
+		{			
+			base.ViewDidLoad();	
+		}
+		
+		public override void ViewWillAppear (bool animated)
 		{
-			base.ViewDidLoad();
-					
-			this.productsList.DataSource = new ProductTableViewDataSource (products.ToList());
-			this.productsList.Delegate = new ProductTableViewDelegate (this, products.ToList());
+			this.productsList.DataSource = new ProductTableViewDataSource (products);
+			this.productsList.Delegate = new ProductTableViewDelegate (this, products);
 			
+			base.ViewWillAppear (animated);
 		}
 		
 		public override void ViewDidUnload()

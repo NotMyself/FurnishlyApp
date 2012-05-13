@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,51 +28,17 @@ namespace Furnishly.UI
 	public partial class StartScreen : UIViewController
 	{
 		private Geolocator geolocator;
-		private TaskScheduler scheduler;
 		private ProductSearchController productSearchController;
+		private ProductsService productsService;
+		
+		private Position currentPosition;
+		private IEnumerable<Product> products;
 		
 		public StartScreen() : base("StartScreen", null)
 		{
+			Console.WriteLine(TaskScheduler.FromCurrentSynchronizationContext ().GetType ().ToString ());
 			this.geolocator = new Geolocator { DesiredAccuracy = 50 };
-			this.scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-		}
-		
-		public override void DidReceiveMemoryWarning()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning();
-			
-			// Release any cached data, images, etc that aren't in use.
-		}
-		
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-			Activity.PushNetworkActive();
-			if(GeolocationIsEnabled())
-			{
-				if(NetworkIsAvailable()) 
-				{
-					startCurrentLocation();
-					
-					this.btnLocate.TouchUpInside += (sender, e) => {
-						this.productSearchController = new ProductSearchController();
-						this.NavigationController.PushViewController(productSearchController, true);
-					};
-				}
-			}
-		}
-		
-		public override void ViewDidUnload()
-		{
-			base.ViewDidUnload();
-			
-			// Clear any references to subviews of the main view in order to
-			// allow the Garbage Collector to collect them sooner.
-			//
-			// e.g. myOutlet.Dispose (); myOutlet = null;
-			
-			ReleaseDesignerOutlets();
+			this.productsService = new ProductsService();
 		}
 		
 		public override void ViewWillAppear(bool animated)
@@ -91,47 +59,101 @@ namespace Furnishly.UI
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
 		}
 		
-		private bool GeolocationIsEnabled()
+		public override void DidReceiveMemoryWarning()
 		{
-			this.messages.Text = "Checking for geolocation services...";
-			if(!this.geolocator.IsGeolocationEnabled)
-			{
-				this.messages.Text = "Geolocation services are disabled.";
-				return false;
-			}
+			// Releases the view if it doesn't have a superview.
+			base.DidReceiveMemoryWarning();
 			
-			return true;
+			// Release any cached data, images, etc that aren't in use.
 		}
 		
-		private bool NetworkIsAvailable()
+		public override void ViewDidLoad()
 		{
-			this.messages.Text = "Checking for network access...";
-			if(Reachability.RemoteHostStatus() == NetworkStatus.NotReachable)
+			base.ViewDidLoad();
+			this.activityIndicator.StartAnimating();
+			startCurrentLocation();
+			
+			this.btnLocate.TouchUpInside += (sender, e) => {
+				startGetProducts();
+			};
+		}
+		
+		public override void ViewDidUnload()
+		{
+			base.ViewDidUnload();
+			
+			// Clear any references to subviews of the main view in order to
+			// allow the Garbage Collector to collect them sooner.
+			//
+			// e.g. myOutlet.Dispose (); myOutlet = null;
+			
+			ReleaseDesignerOutlets();
+		}
+		
+		private void ShowProducts()
+		{
+			var thisPosition = currentPosition;
+			var thisProducts = products.ToList();
+			this.productSearchController = new ProductSearchController(thisPosition, thisProducts);
+			this.NavigationController.PushViewController(productSearchController, true);	
+		}
+				
+		private void OnCurrentLocation(Task<Position> positionTask)
+		{
+		
+			if (positionTask.IsFaulted)
+				this.messages.Text = ((GeolocationException)positionTask.Exception.InnerException).Error.ToString();
+			else
 			{
-				this.messages.Text = "No network connection found.";
-				return false;
+				//this.messages.Alpha = 0;
+				//this.activityIndicator.Alpha = 0;
+				this.btnLocate.Alpha = 1;
+				currentPosition = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+					//positionTask.Result;
 			}
-			return true;
+			Activity.PopNetworkActive();
+
 		}
 		
 		private void startCurrentLocation()
 		{
+			Activity.PushNetworkActive();
+			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
 			this.messages.Text = "Getting current location...";
-			
 			this.geolocator.GetPositionAsync(timeout: 10000)
-				.ContinueWith(t =>
-				{
-					if (t.IsFaulted)
-						this.messages.Text = ((GeolocationException)t.Exception.InnerException).Error.ToString();
-					else
-					{
-						
-						this.messages.Alpha = 0;
-						this.activityIndicator.Alpha = 0;
-						this.btnLocate.Alpha = 1;
-					}
-					Activity.PopNetworkActive();
-				}, scheduler);
+				.ContinueWith(OnCurrentLocation, scheduler);
+		}
+			
+		
+		
+		private IEnumerable<Product> GetProducts(Position postion)
+		{
+			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+				return productsService.GetProductsNear(chicago);
+			//return productsService.GetProductsNear(SearchPosition);
+		}
+		
+		private void startGetProducts()
+		{
+			Activity.PushNetworkActive();
+			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+			this.messages.Text = "Getting products near you...";
+			Task.Factory.StartNew(() => GetProducts(currentPosition))
+						.ContinueWith(OnProducts, scheduler);
+		}
+		
+		private void OnProducts(Task<IEnumerable<Product>> productsTask)
+		{
+			if(productsTask.IsFaulted)
+				this.messages.Text = ((Exception)productsTask.Exception.InnerException).Message;
+			else 
+			{
+				InvokeOnMainThread(() => {
+					this.products = productsTask.Result;
+					ShowProducts();
+				});
+			}
+			Activity.PopNetworkActive();
 		}
 	}
 }

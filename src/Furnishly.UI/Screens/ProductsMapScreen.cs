@@ -14,8 +14,13 @@ namespace Furnishly.UI
 	
 	public partial class ProductsMapScreen : UIViewController
 	{
-		public ProductsMapScreen() : base("ProductsMapScreen", null)
+		Position position;
+		IEnumerable<Product> products;
+		
+		public ProductsMapScreen(Position position, IEnumerable<Product> products) : base("ProductsMapScreen", null)
 		{
+			this.position = position;
+			this.products = products;
 			TabBarItem = new UITabBarItem 
 			{ 
 				Title = "Map", 
@@ -25,20 +30,21 @@ namespace Furnishly.UI
 		
 		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad();
 			this.mapView.GetViewForAnnotation += GetViewForAnnotation;
 			this.mapView.CalloutAccessoryControlTapped += ViewSelectedProduct;
+			base.ViewDidLoad();
 		}
 		
-		public void ShowProducts(IEnumerable<Product> products, Position position) 
+		public override void ViewWillAppear (bool animated)
 		{
-			SetVisibleRegion(position);
-			AnnotateUsersCurrentLocation(position);
-			AnnotateProductsNearBy(products);
-
+			SetVisibleRegion();
+			AnnotateUsersCurrentLocation();
+			AnnotateProductsNearBy();
+			
+			base.ViewWillAppear(animated);
 		}
-		
-		private void SetVisibleRegion(Position position)
+				
+		private void SetVisibleRegion()
 		{
 			var coordinate = new CLLocationCoordinate2D(position.Latitude, position.Longitude);
 			var span = new MKCoordinateSpan(0.02,0.02);
@@ -47,13 +53,13 @@ namespace Furnishly.UI
 			this.mapView.SetRegion(region, true);
 		}
 		
-		private void AnnotateUsersCurrentLocation(Position position)
+		private void AnnotateUsersCurrentLocation()
 		{
 			var coordinate = new CLLocationCoordinate2D(position.Latitude, position.Longitude);
 			this.mapView.AddAnnotation(new UserAnnotation(coordinate));
 		}
 		
-		private void AnnotateProductsNearBy(IEnumerable<Product> products)
+		private void AnnotateProductsNearBy()
 		{
 			foreach (var product in products) 
 				this.mapView.AddAnnotation(new ProductAnnotation(product));	
@@ -93,8 +99,8 @@ namespace Furnishly.UI
 		{
 			var annotationId = "ProductAnnotation";
 			var annotationView = getAvaiableAnnotationView(annotationId,MKPinAnnotationColor.Red, annotation);
-			
-			annotationView.LeftCalloutAccessoryView = new UIWebImageView(annotationView.Frame, annotation.Product.IconImageUri);
+			if(!string.IsNullOrWhiteSpace(annotation.Product.IconImageUri))
+				annotationView.LeftCalloutAccessoryView = new UIWebImageView(annotationView.Frame, annotation.Product.IconImageUri);
             annotationView.RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure);
 			
 			return annotationView;

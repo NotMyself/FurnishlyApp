@@ -13,46 +13,32 @@ namespace Furnishly.UI
 {
 	public class ProductSearchController : UITabBarController
 	{
-		private ProductsService productsService;
 		private ProductsListScreen productsListScreen;
 		private ProductsMapScreen productsMapScreen;
+				
+		Position position;
+		IEnumerable<Product> products;
 		
-		public ProductSearchController()
+		public ProductSearchController(Position position, IEnumerable<Product> products)
 		{
+			this.position = position;
+			this.products = products;
 		}
-		
-		public Position SearchPosition {get; set;}
-		
+				
 		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad();
-			
-			productsService = new ProductsService();
-			var products = GetProducts();
+			base.ViewDidLoad();		
+		}
+		
+		public override void ViewWillAppear (bool animated)
+		{
 			productsListScreen = new ProductsListScreen(products);
-			productsMapScreen = new ProductsMapScreen();
-
+     		productsMapScreen = new ProductsMapScreen(position, products);
 			this.SetViewControllers(new UIViewController[]{ productsMapScreen, productsListScreen }, false);
-			
-			productsMapScreen.ShowProducts(products, GetPosition());			
+
+			base.ViewWillAppear (animated);
 		}
 			                               
-		private Position GetPosition()
-		{
-			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
-			if(SearchPosition == null)
-				return chicago;
-				
-			return SearchPosition;
-		}
-				
-		private IEnumerable<Product> GetProducts()
-		{
-			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
-			if(SearchPosition == null)
-				return productsService.GetProductsNear(chicago);
-			return productsService.GetProductsNear(SearchPosition);
-		}
 	}
 }
 
