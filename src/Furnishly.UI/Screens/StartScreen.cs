@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
@@ -103,7 +104,8 @@ namespace Furnishly.UI
 		{
 			if(exception.InnerException.GetType() == typeof(GeolocationException))
 				ShowLocationServicesAlert();
-//			this.messages.Text = ((GeolocationException)exception.InnerException).Error.ToString();
+			if(exception.InnerException.GetType() == typeof(WebException))
+				ShowNetworkAvalibilityAlert();
 		}
 				
 		private void OnCurrentLocation(Task<Position> positionTask)
@@ -119,7 +121,6 @@ namespace Furnishly.UI
 				this.messages.Alpha = 0;
 				this.btnLocate.Alpha = 1;
 				currentPosition = new Position { Latitude = 41.8942, Longitude =  -87.6228};
-					//positionTask.Result;
 			}
 			Activity.PopNetworkActive();
 
@@ -151,6 +152,16 @@ namespace Furnishly.UI
 			this.activityIndicator.StopAnimating();
 		}
 		
+		private void ShowNetworkAvalibilityAlert() 
+		{
+			using(var alert = new UIAlertView("Oops", "Network connection is not available", null, "OK", null))
+			{
+			    alert.Show();
+			}
+			this.messages.Text = "Please connect to the internet to continue.";
+			this.activityIndicator.StopAnimating();
+		}
+		
 		private IEnumerable<Product> GetProducts(Position postion)
 		{
 			var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
@@ -161,16 +172,26 @@ namespace Furnishly.UI
 		private void BeginGetProducts()
 		{
 			Activity.PushNetworkActive();
+			this.activityIndicator.StartAnimating();
+			this.activityIndicator.Alpha = 1;
 			var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
 			this.messages.Text = "Getting products near you...";
-			Task.Factory.StartNew(() => GetProducts(currentPosition))
+			this.messages.Alpha = 1;
+			if(Reachability.InternetConnectionStatus() != NetworkStatus.NotReachable)
+			{
+				Task.Factory.StartNew(() => GetProducts(currentPosition))
 						.ContinueWith(OnProducts, scheduler);
+			}
+			else
+			{
+				ShowNetworkAvalibilityAlert();
+			}
 		}
 		
 		private void OnProducts(Task<IEnumerable<Product>> productsTask)
 		{
 			if(productsTask.IsFaulted)
-				this.messages.Text = ((Exception)productsTask.Exception.InnerException).Message;
+				HandleException(productsTask.Exception);
 			else 
 			{
 				InvokeOnMainThread(() => {
