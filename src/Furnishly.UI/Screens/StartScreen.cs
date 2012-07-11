@@ -118,7 +118,7 @@ namespace Furnishly.UI
 			else
 			{
 				this.activityIndicator.StopAnimating();
-				var chicago = new Position { Latitude = 41.8942, Longitude =  -87.6228};
+				var chicago = new Position { Latitude = 41.8995265699832, Longitude =  -87.6291402881565};
 				this.messages.Alpha = 0;
 				this.btnLocate.Alpha = 1;
 				currentPosition = chicago;//positionTask.Result;
